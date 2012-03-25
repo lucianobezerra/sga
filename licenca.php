@@ -30,7 +30,7 @@
             <label for="chave">Informe a Chave de Liberação</label> <br>
             <input type="text" name="chave" class="campos" size="50"/>
           </p>
-          <button name="salvar" type="submit" style="width: 85px; height: 25px" class="campo" onclick="liberar(1);">Liberar</button>
+          <button name="salvar" type="submit" style="width: 85px; height: 25px" class="campo">Liberar</button>
         </fieldset>
       </form>
     </div>
