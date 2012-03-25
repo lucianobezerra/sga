@@ -19,7 +19,7 @@ class Conexao {
   }
 
   function close() {
-    pg_close($this->conexao);
+    @pg_close($this->conexao);
     $this->conexao = false;
   }
 

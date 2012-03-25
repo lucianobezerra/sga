@@ -21,8 +21,8 @@ class Valida {
 
     $data_hoje = date('Y-m-d');
     $sql = "SELECT {$this->campoID}, {$this->campoData} FROM {$this->tabela}";
-    $query = pg_query($sql);
-    $result = pg_fetch_object($query);
+    $query = @pg_query($sql);
+    $result = @pg_fetch_object($query);
     $data_expira = decode5t($result->{$this->campoData});
     $conexao->close();
 
