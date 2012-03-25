@@ -1,0 +1,31 @@
+a {
+  display:block;
+  text-decoration:none
+}
+dl {
+  margin:0 auto;
+  width:200px
+}
+dt {
+  background-color:#CC3300;
+  border-bottom:1px solid #fff;
+  font-size: 12pt;
+  font-family: arial, helvetica, serif;
+  padding:2px
+}
+dt a {
+  color:#fff;
+}
+dd, ul {
+  margin:0;
+  padding:0
+}
+ul li {
+  background-color:#EFEFEF;
+  font-size: 10pt;
+  list-style:none
+}
+ul li a {
+  color:#03C;
+  padding:5px
+}

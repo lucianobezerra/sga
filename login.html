@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Autenticação</title>
+    <script type='text/javascript' src='js/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery.form.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript">
+      $(function(){
+        $('#formlogin').submit(function(){
+          var url   = 'ajax/logar.php';
+          var login = $('#login').val();
+          var senha = $('#senha').val();
+          $.post(url, {login: login, senha: senha }, function(resposta){
+            if(!resposta){
+              window.location.href = 'index.php';
+            } else {
+              $('div.mensagem-erro').html(resposta);
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div  class="box_centralizado">
+      <form id="formlogin" action="#" method="post" class="login" name='formlogin'>
+        <fieldset>
+          <legend align="center">SGA:: Acesso ao Sistema</legend>
+
+          <div class="loader" style="display: none;"><img src="imagens/loader.gif" alt="Carregando" /></div>
+          <div class="mensagem-erro"></div>
+
+          <p>
+            <label for="login">Usuário</label> <br />
+            <input type="text" id="login" name="login" class="campos" />
+          </p>
+
+          <p>
+            <label for="senha">Senha</label> <br />
+            <input type="password" id="senha" name="senha" class="campos" />
+          </p>
+          <button name="autenticar" type="submit" style="width: 85px; height: 25px" class="campo">Autenticar</button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

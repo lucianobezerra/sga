@@ -1,0 +1,159 @@
+body {
+  background-image: url('../imagens/fundo.jpg'); background-repeat: repeat-x;
+  font-size: 10pt;
+  font-family: Arial, Verdana, sans-serif;
+}
+
+tbody tr.odd td th{
+  text-align: center;
+  background: #ffb;
+}
+
+thead th {
+  background: #f90;
+}
+
+tr td{
+  font-size: 10pt;
+  line-height: 140%;
+}
+
+.box_centralizado {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:300px;
+  height:120px;
+  margin-left:-130px;
+  margin-top:-120px;
+  text-align:left;
+}
+
+form{
+  font-size: 10pt;
+}
+
+form.login {
+  width:290px;
+  font: 12pt Verdana, sans-serif;
+  color: #003399;
+  padding-left:5px;
+}
+
+form.unidade {
+  width:290px;
+  font: 12pt Verdana, sans-serif;
+  color: #003399;
+  padding-left:10px;
+}
+
+.campo {
+  border: solid;
+  border-color: #a0a0a0;
+  border-width: 1px;
+}
+.botao {
+  background-color: #CC3300;
+  color: #CCFFFF;
+}
+
+#container {
+  padding: 1px;
+  margin: auto;
+  width: 777px;
+  display: table;
+}
+
+#top {
+  width: 100%;
+  min-height: 100px;
+  text-align: center
+}
+
+#left {
+  width: 25%;
+  float: left;
+  margin-right: 20px;
+  height: 400px;
+}
+
+#left ul li a {
+  color: #404040;
+  font-size: 10pt;
+  text-decoration: none;
+}
+
+#left ul li a:hover {
+  background-color:#aaa;
+  color: #03C;
+}
+
+#left ul li ul {
+  display:none;
+  list-style: none;
+  margin-left:15px;
+  padding:0;
+}
+
+#right {
+  width: 71%;
+  border-left: 1px solid #999;
+  float: left;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+#bottom {
+  float:left;
+  width: 100%;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 10pt;
+  border-top: 1px solid #999;
+}
+
+.mensagem-erro {
+  color: red;
+}
+
+#ambiente{
+  margin-top: 10px; 
+  text-align: right; 
+  display:inline;
+}
+
+.ambiente a:hover{
+  color:#333;
+  border:1px solid #ccc;
+  text-decoration:none;
+}
+
+.relatorio{
+  border-style: solid;
+  border-width: 1px;
+  border-color: silver;
+  margin-top: 5px;
+}
+
+p{
+  margin-top: 8px;
+}
+
+label {
+  display: block;
+  margin-top: 4px;
+}
+p {
+  clear: both;
+}
+
+.sem_acesso{
+  margin-top: 30px;
+  font-size: 14pt;
+  color: #eb0a28;
+  text-align: center;
+}
+
+.aviso{
+  margin-top: 16px;
+}

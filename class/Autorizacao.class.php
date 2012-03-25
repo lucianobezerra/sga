@@ -1,0 +1,67 @@
+<?php
+
+require_once("Base.class.php");
+
+class Autorizacao extends Base {
+
+  public function __construct($campos = array()) {
+    parent::__construct();
+    $this->tabela = 'aihs';
+    if (sizeof($campos) <= 0) {
+      $this->campos_valores = array(
+          "id_operador" => null,
+          "id_estabelecimento" => null,
+          "id_tipo" => null,
+          "id_faixa" => null,
+          "id_competencia" => null,
+          "numero" => null,
+          "digito" => null,
+          "nome_pac" => null,
+          "nascimento" => null,
+          "internacao" => null);
+      $this->campos_valores = $campos;
+    }
+    $this->campopk = 'id';
+  }
+
+  public function contaAutorizacoes($inicial, $final) {
+    $sql = "select count(numero) as quantidade from aihs ";
+    $sql .= "where numero between {$inicial} and {$final}";
+    $res = pg_query($sql);
+    $ret = pg_fetch_array($res);
+    return $ret['quantidade'];
+  }
+  
+  public function ultima($id_faixa){
+    $sql = "select max(numero) as ultima from aihs where id_faixa={$id_faixa}";
+    $result = pg_query($sql);
+    $linha = pg_fetch_array($result);
+    return $linha['ultima'];
+  }
+  
+  public function proxima($id_faixa){
+    $ultima  = $this->ultima($id_faixa);
+    $proxima = $ultima +1;
+    return $proxima;
+  }
+  
+  public function buscaDetalhada($id){
+  $sql = "select aihs.numero||'-'||aihs.digito as numero, estabelecimentos.cnes, estabelecimentos.nome_fantasia, tipos.descricao as tipo, faixas.inicial||' a '||faixas.final as faixa, ";
+  $sql .= "competencias.ano||competencias.mes as competencia, operadores.nome nome_operador, aihs.nome_pac, ";
+  $sql .= "aihs.nascimento, aihs.internacao from aihs ";
+  $sql .= "inner join operadores on aihs.id_operador=operadores.id ";
+  $sql .= "inner join estabelecimentos on aihs.id_estabelecimento = estabelecimentos.id ";
+  $sql .= "inner join tipos on aihs.id_tipo = tipos.id ";
+  $sql .= "inner join faixas on aihs.id_faixa = faixas.id ";
+  $sql .= "inner join competencias on aihs.id_competencia = competencias.id ";
+  $sql .= "where aihs.id={$id} ";
+  $result = pg_query($sql);
+    $retorno = pg_fetch_array($result);
+    return $retorno;
+  }
+  
+}
+
+
+
+?>
