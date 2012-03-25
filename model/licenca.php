@@ -2,18 +2,16 @@
 
 require("../class/Config.class.php");
 
-$id = $_REQUEST['id'];
-$acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
-$chave = $_REQUEST['chave'];
+$acao  = isset($_REQUEST['acao'])  ? $_REQUEST['acao']  : null;
+$chave = isset($_REQUEST['chave']) ? $_REQUEST['chave'] : null;
 
 switch ($acao) {
-  case "liberar": liberar($id, $chave);
-    break;
+  case "liberar": liberar($chave); break;
 }
 
-function liberar($id, $chave) {
+function liberar($chave) {
   $config = new Config();
-  $config->valorpk = $id;
+  $config->valorpk = 1;
   $config->setValor("expira", $chave);
   $config->atualizar($config);
 }
