@@ -1,6 +1,6 @@
 <?php
 // Incluindo arquivo de conexão/configuração
-require_once('config/conn.php');
+require_once('class/Login.class.php');
 
 // Instanciando novo objeto da classe Login
 $objLogin = new Login();
