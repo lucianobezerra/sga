@@ -33,15 +33,25 @@ class Autorizacao extends Base {
   }
   
   public function ultima($id_faixa){
-    $sql = "select max(numero) as ultima from aihs where id_faixa={$id_faixa}";
-    $result = pg_query($sql);
-    $linha = pg_fetch_array($result);
-    return $linha['ultima'];
+    $sql_aih = "select coalesce(max(numero), 0) as ultima from aihs where id_faixa={$id_faixa}";
+    $res_aih = pg_query($sql_aih);
+    $linha_aih = pg_fetch_array($res_aih);
+    
+    if($linha_aih['ultima'] == 0){
+      $sql_faixa = "select (inicial -1) as primeira from faixas where id={$id_faixa}";
+      $res_faixa = pg_query($sql_faixa);
+      $linha_faixa = pg_fetch_array($res_faixa);
+      return $linha_faixa['primeira'];
+    } else {
+      return $linha_aih['ultima'];
+    }
   }
   
   public function proxima($id_faixa){
     $ultima  = $this->ultima($id_faixa);
+    echo "Ultima: {$ultima}<br/>";
     $proxima = $ultima +1;
+    echo "Proxima: {$proxima}<br/>";
     return $proxima;
   }
   

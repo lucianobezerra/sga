@@ -25,7 +25,6 @@ endif;
       <th width="20%"style="text-align: center">Final</th>
       <th width="20%"style="text-align: center">Última</th>
       <th width="8%" style='text-align:center;'>Saldo</th>
-      <th width="2%" style='text-align:center;'>ID</th>
     </tr>
   </thead>
   <?php
@@ -38,7 +37,6 @@ endif;
     echo "<td style='text-align:center;'>" . $faixa['final'] . "</td>";
     echo "<td style='text-align:center;'>" . $ultima . "</td>";
     echo "<td style='text-align:center;'>" . $faixa['saldo'] . "</td>";
-    echo "<td style='text-align:center;'>" . $faixa['id'] . "</td>";
     echo "</tr>";
   }
   ?>

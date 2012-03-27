@@ -28,19 +28,20 @@ exit;
         $(function($){
           $("#nascimento").mask("99/99/9999");
           $("#internacao").mask("99/99/9999");
-          $('input[name=salvar]').live('click', function(){
-            var url    = 'model/autorizacao?acao=inserir';
-            var params = $('form').serialize();
+          
+          $('input[type=submit]').click(function(e){
+            e.preventDefault();
+            var valores = $('#autorizacao').serialize();
             $.ajax({
-              type: 'post',
-              url: url,
-              data: params,
-              success: function(resposta){
+             url:  'model/autorizacao?acao=inserir',
+             type: 'post',
+             dataType: 'html',
+             data: valores,
+             success: function(resposta){
                 $('#retorno').html(resposta);
                 $('input[type=text]').attr('disabled', true);
               }
             });
-            return false;
           });
             
           $('input[name=nova]').live('click',function(){
@@ -62,8 +63,8 @@ exit;
         <label for="nome_paciente">Paciente:</label><input type="text" size="60" maxlength="60" name="nome_paciente" id="nome_paciente" class="campo"/>
         <label for="nascimento">Nascimento:</label><input type="text" size="15" maxlength="10" name="nascimento" id="nascimento" class="campo" />
         <label for="internacao">Internação:</label><input type="text" size="15" maxlength="10" name="internacao" id="internacao" class="campo" /><br/><br/>
-        <input name="salvar"  type="button" style="width: 85px; height: 25px;" class="campo" value="Gravar"/>
-        <input name="nova"    type="button" style="width: 85px; height: 25px;" class="campo" value="Cancelar"/>
+        <input name="salvar"  type="submit" style="width: 120px; height: 25px;" class="campo" value="Gerar Autorização"/>
+        <input name="nova"    type="button" style="width: 120px; height: 25px;" class="campo" value="Nova Autorização"/>
       </form>
       <br/>
       <div id="retorno" style="font-size: 12pt; color: red"></div>
