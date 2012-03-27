@@ -1,9 +1,9 @@
 <?php
 define( 'DS', DIRECTORY_SEPARATOR );
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Estabelecimento.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Login.class.php');
-$login = new Login();
-$nivel = $login->getNivel();
+require_once(dirname(dirname(dirname(__FILE__))) . DS . 'util' . DS . 'funcoes.php');
+
+$nivel = retornaNivel();
 
 $ups = new Estabelecimento();
 $ups->extras_select = "where ativo order by cnes";

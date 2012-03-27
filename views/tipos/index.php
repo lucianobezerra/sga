@@ -1,9 +1,9 @@
 <?php
 define( 'DS', DIRECTORY_SEPARATOR );
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Tipo.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Login.class.php');
-$login = new Login();
-$nivel = $login->getNivel();
+require_once(dirname(dirname(dirname(__FILE__))) . DS . 'util' . DS . 'funcoes.php');
+
+$nivel = retornaNivel();
 
 $tipos = new Tipo();
 $tipos->extras_select = "where ativo order by id";
@@ -78,9 +78,9 @@ $tipos->selecionaTudo($tipos);
         <tr id='row_<?= $linha->id ?>'>
           <td style='text-align: center'><?= str_pad($linha->codigo, 3, '0', STR_PAD_LEFT) ?></td>
           <td><?= $linha->descricao; ?></td>
-          <td style='text-align: center'><? echo ($nivel < 2) ? "<a class='alterar' href='views/tipos/alterar.php?id={$linha->id}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Desativar'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Desativar'/>" ?></td>
-          <td style='text-align: center'><? echo ($nivel < 2) ? "<a href='#' onClick='excluir({$linha->id})' title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir'/>"; ?></td>
-          <td style='text-align: center'><? echo ($nivel < 2) ? "<a href='#' onClick='desativar({$linha->id})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar'/>"; ?></td>
+          <td style='text-align: center'><? echo ($nivel < 2) ? "<a class='alterar' href='views/tipos/alterar.php?id={$linha->id}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Desativar'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Desativar' title='Sem Permissão para Alterar'/>" ?></td>
+          <td style='text-align: center'><? echo ($nivel < 2) ? "<a href='#' onClick='excluir({$linha->id})' title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir' title='Sem Permissão para Excluir'/>"; ?></td>
+          <td style='text-align: center'><? echo ($nivel < 2) ? "<a href='#' onClick='desativar({$linha->id})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar' title='Sem Permissão para Desativar'/>"; ?></td>
         <?
       }
         ?>

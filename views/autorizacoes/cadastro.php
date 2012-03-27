@@ -8,7 +8,6 @@ $id_ups        = $session->getNode("id_estabelecimento");
 $id_tipo       = $session->getNode("id_tipo");
 $id_faixa      = $session->getNode("id_faixa");
 $id_cmpt       = $session->getNode("id_competencia");
-$nome_operador = $session->getNode("nome_operador");
 
 $ambiente = $session->check();
 if (!$ambiente) {

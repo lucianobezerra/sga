@@ -5,7 +5,7 @@ require_once("class/Valida.class.php");
 $session = new Session();
 $session->start();
 $logado = $session->getNode("id_operador");
-if(!$logado){
+if (!$logado) {
   @header('Location: login.html');
 }
 
@@ -61,10 +61,10 @@ if (!$valida->validaSistema()) {
   <body>
     <div id="container">
       <div id="top">
-        <img src="imagens/banner_topo_p_1.jpg"/>
-        <img src="imagens/banner_topo_p_2.jpg"/>
+<!--        <img src="imagens/banner_topo_p_1.jpg"/>
+        <img src="imagens/banner_topo_p_2.jpg"/> -->
         <img src="imagens/banner_topo_p_3.jpg"/>
-        <img src="imagens/banner_topo_p_4.jpg"/>
+<!--        <img src="imagens/banner_topo_p_4.jpg"/> -->
       </div>
       <div id="left" style="height: 420px;"><?php include 'menus.php'; ?></div>
       <div id="right" style="overflow: auto; height: 400px"></div>

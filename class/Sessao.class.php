@@ -32,8 +32,11 @@ class Session {
   }
 
   public function check() {
-    $ambiente = $this->getNode("id_estabelecimento");
-    if (empty($ambiente)) {
+    $ups  = $this->getNode("id_estabelecimento");
+    $cmpt = $this->getNode("id_competencia");
+    $tipo = $this->getNode("id_tipo");
+    $faixa = $this->getNode("id_faixa");
+    if (empty($ups) || empty($cmpt) || empty($tipo) || empty($faixa)) {
       return false;
     } else {
       return true;

@@ -9,7 +9,7 @@ $sessao->addNode("id_competencia",     $_POST['competencia']);
 $sessao->addNode("id_tipo",            $_POST['tipo']);
 $sessao->addNode("id_faixa",           $_POST['faixa']);
 $sessao->addNode("id_operador",        $_POST['operador']);
-$sessao->addNode("nivel_operador",        $_POST['operador']);
+$sessao->addNode("nivel_operador",     $_POST['nivel']);
 
 //@header('Location: index.php');
 ?>

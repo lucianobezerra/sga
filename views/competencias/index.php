@@ -1,16 +1,14 @@
 <?php
 define( 'DS', DIRECTORY_SEPARATOR );
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Competencia.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Login.class.php');
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'util' . DS . 'funcoes.php');
-$login = new Login();
-$nivel = $login->getNivel();
+
+$nivel = retornaNivel();
 
 $competencia = new Competencia();
 $competencia->extras_select = "where ativo=true order by ano,mes";
 $competencia->selecionaTudo($competencia);
 
-echo "<p style='text-align: right'>OPERADOR: ".$_SESSION['nome']."</p>";
 ?>
 <html>
   <head>

@@ -1,10 +1,9 @@
 <?php
 define('DS', DIRECTORY_SEPARATOR);
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Faixa.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Login.class.php');
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'util' . DS . 'funcoes.php');
-$login = new Login();
-$nivel = $login->getNivel();
+
+$nivel = retornaNivel();
 
 $faixas = new Faixa();
 $listagem = $faixas->lista();
@@ -80,9 +79,9 @@ $listagem = $faixas->lista();
           <td style='text-align: center;'><?= $faixa['inicial']; ?></td>
           <td style='text-align: center;'><?= $faixa['final']; ?></td>
           <td style='text-align: center;'><?= $faixa['saldo']; ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='alterar' href='views/faixas/alterar.php?id={$faixa['id']}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar Faixa'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Alterar Faixa'/>" ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='excluir' href='#' onClick='excluir({$faixa['id']})' title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir Faixa'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir Faixa'/>" ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='desativar' href='#' onClick='desativar({$faixa['id']})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar Faixa'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar Faixa'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='alterar' href='views/faixas/alterar.php?id={$faixa['id']}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar Faixa'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Alterar Faixa' title='Sem permissão para Alterar'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='excluir' href='#' onClick='excluir({$faixa['id']})' title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir Faixa'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir Faixa' title='Sem permissão para Excluir'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='desativar' href='#' onClick='desativar({$faixa['id']})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar Faixa'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar Faixa' title='Sem permissão para Deativar'/>" ?></td>
         </tr>
       <? } ?>
     </table>

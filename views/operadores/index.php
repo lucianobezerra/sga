@@ -1,12 +1,12 @@
 <?php
 define('DS', DIRECTORY_SEPARATOR);
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Login.class.php');
 require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Operador.class.php');
-$login = new Login();
-$nivel = $login->getNivel();
+require_once(dirname(dirname(dirname(__FILE__))) . DS . 'util' . DS . 'funcoes.php');
+
+$nivel = retornaNivel();
 
 $operador = new Operador();
-$operador->extras_select = "where ativo order by id";
+$operador->extras_select = "where ativo order by nivel";
 $operador->selecionaTudo($operador);
 ?>
 <html>
@@ -90,10 +90,10 @@ $operador->selecionaTudo($operador);
             }
             ?>
           </td>
-          <td style='text-align: center;'><a class='alterar' href='views/operadores/alterar.php?id=<?= $linha->id; ?>' title="Alterar"><img src="imagens/alterar.gif" border="0" alt=""/></a></td>
-          <td style='text-align: center;'><a class='desativar' href='#' onClick='desativar(<?= $linha->id; ?>)' title="Desativar"><img src="imagens/desativar.gif" border="0" alt=""/></a></td>
-          <td style='text-align: center;'><a class='excluir' href='#' onClick="excluir(<?= $linha->id ?>)" title="Excluir"><img src="imagens/excluir.png" border="0" alt=""/></a></td>
-          <td style='text-align: center;'><a class='permissao' href='views/permissoes/index.php?id_operador=<?=$linha->id ?>' title="Permissões"><img src="imagens/permissoes.gif" border="0" alt=""/></a></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='alterar' href='views/operadores/alterar.php?id=<?= $linha->id; ?>' title='Alterar'><img src='imagens/alterar.gif' border='0' alt=''/></a>" : "<img src='imagens/alterar.gif' border='0' alt='' title='Sem permissão para alterar'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='desativar' href='#' onClick='desativar(<?= $linha->id; ?>)' title='Desativar'><img src='imagens/desativar.gif' border='0' alt=''/></a>"    : "<img src='imagens/desativar.gif' border='0' alt='' title='Sem permissão para Desativar'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='excluir' href='#' onClick='excluir(<?= $linha->id ?>)' title='Excluir'><img src='imagens/excluir.png' border='0' alt=''/></a>" : "<img src='imagens/excluir.png' border='0' alt='' title='Sem permissão para Excluir'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='permissao' href='views/permissoes/index.php?id_operador=<?=$linha->id ?>' title='Permissões'><img src='imagens/permissoes.gif' border='0' alt=''/></a>" : "<img src='imagens/permissoes.gif' border='0' alt='' title='Sem permissão para dar Permissões'/>" ?></td>
         </tr>
       <?php } ?>
     </table>

@@ -1,5 +1,22 @@
 <?php
 
+define( 'DS', DIRECTORY_SEPARATOR );
+require_once(dirname(dirname(__FILE__)) . DS . 'class' . DS . 'Sessao.class.php');
+require_once(dirname(dirname(__FILE__)) . DS . 'class' . DS . 'Operador.class.php');
+
+function retornaNivel(){
+  $session = new Session();
+  $session->start();
+  $usuario = $session->getNode("id_operador");
+
+  $operador = new Operador();
+  $operador->extras_select = "where id={$usuario}";
+  $operador->pegaNivel($operador);
+  $nivel = $operador->retornaDados("array");
+  return $nivel['nivel'];
+}
+
+
 function formata_competencia($strDate) {
   $arrMonthsOfYear = array(1 => 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
 
