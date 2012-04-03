@@ -1,6 +1,6 @@
 <?php
   include 'util/funcoes.php';
-  $expirar = '2012-04-12';
+  $expirar = '2012-04-20';
   $hoje    = Date('Y-m-d');
   echo "Expirar em: ".ConverteDataparaBR($expirar).": ". encode5t($expirar);
   echo "<br/>";

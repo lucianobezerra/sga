@@ -146,10 +146,14 @@ abstract class Banco {
 
   public function retornaDados($tipo = null) {
     switch (strtolower($tipo)) {
-      case "array" : return pg_fetch_array($this->dataset);  break;
-      case "assoc" : return pg_fetch_assoc($this->dataset);  break;
-      case "object": return pg_fetch_object($this->dataset); break;
-      default : return pg_fetch_object($this->dataset);      break;
+      case "array" : return pg_fetch_array($this->dataset);
+        break;
+      case "assoc" : return pg_fetch_assoc($this->dataset);
+        break;
+      case "object": return pg_fetch_object($this->dataset);
+        break;
+      default : return pg_fetch_object($this->dataset);
+        break;
     }
   }
 
