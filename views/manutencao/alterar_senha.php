@@ -14,16 +14,11 @@ switch ($nivel){
   case 0: $where = "order by nome"; break;
   case 1: $where = "where nivel >= 1 order by nome"; break;
   case 2: $where = "where nivel >= 2 order by nome"; break;
-  case 3: $where = "where nivel >= 3 order by nome"; break;
+  case 3: $where = "where id={$id_operador}"; break;
 }
 
-if ($nivel < 3):
   $operador->extras_select = $where;
   $operador->selecionaTudo($operador);
-else:
-  $operador->valorpk = $id_operador;
-  $operador->seleciona($operador);
-endif;
 ?>
 <html>
   <head>
