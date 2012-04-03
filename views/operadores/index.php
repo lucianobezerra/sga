@@ -90,10 +90,10 @@ $operador->selecionaTudo($operador);
             }
             ?>
           </td>
-          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='alterar' href='views/operadores/alterar.php?id=<?= $linha->id; ?>' title='Alterar'><img src='imagens/alterar.gif' border='0' alt=''/></a>" : "<img src='imagens/alterar.gif' border='0' alt='' title='Sem permissão para alterar'/>" ?></td>
-          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='desativar' href='#' onClick='desativar(<?= $linha->id; ?>)' title='Desativar'><img src='imagens/desativar.gif' border='0' alt=''/></a>"    : "<img src='imagens/desativar.gif' border='0' alt='' title='Sem permissão para Desativar'/>" ?></td>
-          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='excluir' href='#' onClick='excluir(<?= $linha->id ?>)' title='Excluir'><img src='imagens/excluir.png' border='0' alt=''/></a>" : "<img src='imagens/excluir.png' border='0' alt='' title='Sem permissão para Excluir'/>" ?></td>
-          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='permissao' href='views/permissoes/index.php?id_operador=<?=$linha->id ?>' title='Permissões'><img src='imagens/permissoes.gif' border='0' alt=''/></a>" : "<img src='imagens/permissoes.gif' border='0' alt='' title='Sem permissão para dar Permissões'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='alterar' href='views/operadores/alterar.php?id={$linha->id}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt=''/></a>" : "<img src='imagens/alterar.gif' border='0' alt='' title='Sem permissão para alterar'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='desativar' href='#' onClick='desativar({$linha->id})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt=''/></a>"    : "<img src='imagens/desativar.gif' border='0' alt='' title='Sem permissão para Desativar'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='excluir' href='#' onClick='excluir({$linha->id})' title='Excluir'><img src='imagens/excluir.png' border='0' alt=''/></a>" : "<img src='imagens/excluir.png' border='0' alt='' title='Sem permissão para Excluir'/>" ?></td>
+          <td style='text-align: center;'><?php echo ($nivel <2) ? "<a class='permissao' href='views/permissoes/index.php?id_operador={$linha->id}' title='Permissões'><img src='imagens/permissoes.gif' border='0' alt=''/></a>" : "<img src='imagens/permissoes.gif' border='0' alt='' title='Sem permissão para dar Permissões'/>" ?></td>
         </tr>
       <?php } ?>
     </table>

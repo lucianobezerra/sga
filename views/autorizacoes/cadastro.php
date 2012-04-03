@@ -46,6 +46,7 @@ exit;
           $('input[name=nova]').live('click',function(){
             $('input[type=text]').attr('disabled', false);
             $('form')[0].reset();
+            $('#retorno').html('');
             $('input:text:eq(0)').focus();
           });
         });
@@ -66,7 +67,7 @@ exit;
         <input name="nova"    type="button" style="width: 120px; height: 25px;" class="campo" value="Nova Autorização"/>
       </form>
       <br/>
-      <div id="retorno" style="font-size: 12pt; color: red"></div>
+      <div id="retorno" style="font-size: 18pt; color: blue"></div>
     </body>
   </html>
 <? } ?>

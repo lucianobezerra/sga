@@ -49,9 +49,7 @@ class Autorizacao extends Base {
   
   public function proxima($id_faixa){
     $ultima  = $this->ultima($id_faixa);
-    echo "Ultima: {$ultima}<br/>";
     $proxima = $ultima +1;
-    echo "Proxima: {$proxima}<br/>";
     return $proxima;
   }
   
