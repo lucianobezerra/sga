@@ -1,5 +1,8 @@
 <?php
 
+define('DS', DIRECTORY_SEPARATOR);
+require_once(dirname(dirname(__FILE__)) . DS . 'class' . DS . 'Sessao.class.php');
+
 function retornaNivel(){
   $session = new Session();
   $session->start();

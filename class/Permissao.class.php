@@ -34,10 +34,14 @@ class Permissao extends Base {
     $sql .= "inner join operadores on permissoes.id_operador = operadores.id ";
     $sql .= "where id_estabelecimento={$estabelecimento} and id_operador={$operador}";
     $result = pg_query($sql);
-    $retorno = pg_fetch_array($result);
-    return $retorno;
+    $retorno = pg_fetch_array($result, 0, PGSQL_ASSOC);
+    if ($retorno['qtde'] > 0):
+      return true;
+    else:
+      return false;
+    endif;
   }
-  
+
 }
 
 ?>

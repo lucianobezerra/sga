@@ -47,7 +47,7 @@ function exibir($id) {
     </tr>
     <tr>
       <td>Nome do Paciente</td>
-      <td><?= $linha['nome_pac']; ?> </td>
+      <td><?= $linha['nome_pac'] ?> </td>
     </tr>
     <tr>
       <td>Data Nascimento</td>
@@ -146,14 +146,16 @@ function localiza($valor) {
       <td style="width: 14%; text-align: center">Nascimento</td>
       <td style="width: 14%; text-align: center">Internação</td>
     </tr>
-        <? while ($linha = $autorizacao->retornaDados()) { ?>
+        <?
+            $permissao = new Permissao();
+            while ($linha = $autorizacao->retornaDados()) {
+         ?>
       <tr>
         <td style="text-align: center"><a class='show' href='#' onclick='exibir(<?= $linha->id ?>)' title="Detalhar"><?= "{$linha->numero}-{$linha->digito}" ?></a> </td>
         <td>
     <?php
-    $permissao = new Permissao();
-    $linha_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
-    echo ($linha_permissao['qtde'] != 0) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
+    $possui_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
+    echo ($possui_permissao == true) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
     ?>
         </td>
         <td style="text-align: center"><?= ConverteDataParaBR($linha->nascimento) ?> </td>
