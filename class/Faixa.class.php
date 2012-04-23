@@ -9,17 +9,7 @@ class Faixa extends Base {
     parent::__construct();
     $this->tabela = 'faixas';
     if (sizeof($campos) <= 0) {
-      $this->campos_valores = array(
-          "inicial" => null,
-          "final" => null,
-          "ultima" => null,
-          "saldo" => null,
-          "data_cadastro" => null,
-          "faixa_tipo" => null,
-          "faixa_cmpt" => null,
-          "id_tipo" => null,
-          "id_competencia" => null,
-          "ativo" => null);
+      $this->campos_valores = array("inicial" => null, "final" => null, "ultima" => null, "saldo" => null, "data_cadastro" => null, "id_tipo" => null, "id_competencia" => null, "ativo" => null);
     } else {
       $this->campos_valores = $campos;
     }
@@ -43,6 +33,13 @@ class Faixa extends Base {
     $res = pg_query($sql);
     $ret = pg_fetch_array($res);
     return $ret['quantidade'];
+  }
+  
+  public function contaAutorizacoes($id){
+    $sql = "select conta_autorizacoes({$id}) as qtde";
+    $res = pg_query($sql);
+    $ret = pg_fetch_array($res);
+    return $ret['qtde'];
   }
 
   function lista() {

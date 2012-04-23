@@ -6,10 +6,28 @@ $acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
 $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 
 switch ($acao) {
-  case "inserir": inserir();    break;
-  case "alterar": alterar($id);    break;
-  case "excluir": excluir($id);    break;
-  case "desativar": desativar($id);    break;
+  case "inserir":   inserir();      break;
+  case "alterar":   alterar($id);   break;
+  case "excluir":   excluir($id);   break;
+  case "desativar": desativar($id); break;
+  case "ajustar":   ajustar($id);   break;
+}
+
+function ajustar($id){
+  $faixa = new Faixa();
+  $faixa->valorpk = $id;
+  $geradas = $faixa->quantidadeAutorizacoes($id);
+  $usadas  = $faixa->contaAutorizacoes($id);
+  $novo_saldo = $geradas - $usadas;
+  $faixa->setValor("saldo", $novo_saldo);
+  $faixa->delCampo("inicial");
+  $faixa->delCampo("final");
+  $faixa->delCampo("ultima");
+  $faixa->delCampo("data_cadastro");
+  $faixa->delCampo("id_tipo");
+  $faixa->delCampo("id_competencia");
+  $faixa->delCampo("ativo");
+  $faixa->atualizar($faixa);
 }
 
 function inserir() {
@@ -36,11 +54,7 @@ function alterar($id) {
     $faixa->delCampo("ultima");
     $faixa->delCampo("saldo");
     $faixa->delCampo("data_cadastro");
-    $faixa->delCampo("faixa_tipo");
-    $faixa->delCampo("faixa_cmpt");
     $faixa->atualizar($faixa);
-    
-//    $faixa->atualizaSaldo($id, $_POST['hidden_inicial'], $_POST['final']);
   } else {
     echo "Autorização FINAL {$_POST['final']} já utilizada!";
   }

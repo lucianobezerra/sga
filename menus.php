@@ -1,5 +1,9 @@
 <?php
-//$nivel = $_SESSION['nivel'];
+require_once(dirname(__FILE__) . DS . 'class' . DS . 'Operador.class.php');
+require_once(dirname(__FILE__) . DS . 'util' . DS . 'funcoes.php');
+
+$nivel = retornaNivel();
+
 ?>
 <dl>
   <dt id="inicio"><a href="home.php">Início</a></dt>
@@ -22,12 +26,11 @@
       <li><a href="views/autorizacoes/resumo.php">Resumo</a></li>
     </ul>
   </dd>
-    <dt><a href="#">Manutenção</a></dt>
-    <dd>
-      <ul>
-        <li><a href="views/manutencao/alterar_senha.php">Alterar Senha</a></li>
-        <li><?php //echo ($nivel <= 1) ? "<a href='views/faixas/ajustar.php'>Ajustar Faixa</a>" : "<span style='color:#03C; padding:5px; font-size: 14px; font-family: arial, helvetica, serif;'>Ajustar Faixa</span>" ?></li>
-      </ul>
-    </dd>
+  <dt><a href="#">Manutenção</a></dt>
+  <dd>
+    <ul>
+      <li><a href="views/manutencao/alterar_senha.php">Alterar Senha</a></li>
+    </ul>
+  </dd>
   <dt><a class="sair" href="sair.php">Sair do Sistema</a></dt>
 </dl>

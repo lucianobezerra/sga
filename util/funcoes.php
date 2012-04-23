@@ -1,6 +1,6 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
+//define('DS', DIRECTORY_SEPARATOR);
 require_once(dirname(dirname(__FILE__)) . DS . 'class' . DS . 'Sessao.class.php');
 require_once(dirname(dirname(__FILE__)) . DS . 'class' . DS . 'Operador.class.php');
 

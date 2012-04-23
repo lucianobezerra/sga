@@ -27,6 +27,22 @@ $listagem = $faixas->lista();
           }
         });
       }
+      
+      function ajustar(id){
+        $.post('model/faixa.php?acao=ajustar', {id: +id, ajax: true},
+        function(resposta){
+          if(!resposta){
+            $('#retorno').html('Faixa de Autorização Ajustada!');
+            $('#retorno').delay(4000);
+            $('#right').load("home.php");
+          } else {
+            $('#retorno').html(resposta);
+            $('#retorno').fadeIn('slow');
+            $('#retorno').delay(4000).fadeOut(1000);
+          }
+        });
+      }
+
       function excluir(id){
         $.post('model/faixa.php?acao=excluir',
         {id: +id, ajax: true},
@@ -43,7 +59,7 @@ $listagem = $faixas->lista();
           }
         });
       }
-
+      
       $(function($){
         $('tbody tr:odd').addClass('odd');
         $('.nova_faixa').click(function(){
@@ -63,14 +79,14 @@ $listagem = $faixas->lista();
     <table width="100%" border="1" align="center" style="margin-top: 12px;font-size: 10pt; line-height: 140%">
       <thead>
         <tr>
-          <th colspan="7" style='text-align: center; font-size: 12pt'>Faixas Cadastradas</th>
+          <th colspan="8" style='text-align: center; font-size: 12pt'>Faixas Cadastradas</th>
         </tr>
         <tr>
           <th width="35%">Tipo</th>
           <th style='text-align: center;' width="20%">Inicial</th>
           <th style='text-align: center;' width="20%">Final</th>
           <th style='text-align: center;' width="10%">Saldo</th>
-          <th colspan="3" style='text-align: center;' width="15%">Ação</th>
+          <th colspan="4" style='text-align: center;' width="15%">Ação</th>
         </tr>
       </thead>
       <?php foreach ($listagem as $faixa) { ?>
@@ -79,9 +95,10 @@ $listagem = $faixas->lista();
           <td style='text-align: center;'><?= $faixa['inicial']; ?></td>
           <td style='text-align: center;'><?= $faixa['final']; ?></td>
           <td style='text-align: center;'><?= $faixa['saldo']; ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='alterar' href='views/faixas/alterar.php?id={$faixa['id']}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar Faixa'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Alterar Faixa' title='Sem permissão para Alterar'/>" ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='excluir' href='#' onClick='excluir({$faixa['id']})' title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir Faixa'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir Faixa' title='Sem permissão para Excluir'/>" ?></td>
-          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='desativar' href='#' onClick='desativar({$faixa['id']})' title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar Faixa'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar Faixa' title='Sem permissão para Deativar'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='alterar'   href='views/faixas/alterar.php?id={$faixa['id']}' title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar Faixa'/></a>" : "<img src='imagens/alterar.gif' border='0' alt='Alterar Faixa' title='Sem permissão para Alterar'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='excluir'   href='#' onClick='excluir({$faixa['id']})'        title='Excluir'><img src='imagens/excluir.png' border='0' alt='Excluir Faixa'/></a>" : "<img src='imagens/excluir.png' border='0' alt='Excluir Faixa' title='Sem permissão para Excluir'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='desativar' href='#' onClick='desativar({$faixa['id']})'      title='Desativar'><img src='imagens/desativar.gif' border='0' alt='Desativar Faixa'/></a>" : "<img src='imagens/desativar.gif' border='0' alt='Desativar Faixa' title='Sem permissão para Deativar'/>" ?></td>
+          <td style='text-align: center;'><? echo ($nivel < 2) ? "<a class='ajustar'   href='#' onClick='ajustar({$faixa['id']})'        title='Ajustar'>  <img src='imagens/ajustar.png'   border='0' alt='Ajustar Faixa'/></a>" : "<img src='imagens/ajustar.png'   border='0' alt='Ajustar Faixa'/>" ?></td>
         </tr>
       <? } ?>
     </table>
