@@ -10,6 +10,13 @@ $nivel = retornaNivel();
   <dt><a href="#">Tabelas Básicas</a></dt>
   <dd>
     <ul>
+      <li><a href="views/procedimentos/index.php">Procedimentos</a></li>
+      <li><a href="views/diagnosticos/index.php">Diagnósticos</a></li>
+    </ul>
+  </dd>
+  <dt><a href="#">Cadastros</a></dt>
+  <dd>
+    <ul>
       <li><a href="views/estabelecimentos/index.php">Estabelecimentos</a></li>
       <li><a href="views/competencias/index.php">Competências</a></li>
       <li><a href="views/tipos/index.php">Tipos de Autorização</a></li>

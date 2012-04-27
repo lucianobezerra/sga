@@ -5,7 +5,7 @@ abstract class Banco {
   private $servidor = 'localhost';
   private $usuario = 'postgres';
   private $senha = 'postgres';
-  private $nomebanco = 'sga';
+  private $nomebanco = 'sga2';
   private $conexao = null;
   private $dataset = null;
   private $linhasafetadas = -1;

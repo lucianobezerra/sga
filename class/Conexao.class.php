@@ -5,7 +5,7 @@ class Conexao {
   private $host = "localhost";
   private $user = "postgres";
   private $pswd = "postgres";
-  private $banco = "sga";
+  private $banco = "sga2";
   private $strConexao;
   private $conexao;
 

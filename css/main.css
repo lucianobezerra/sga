@@ -141,6 +141,7 @@ p{
 
 label {
   display: block;
+  width: 120px;
   margin-top: 4px;
 }
 p {
