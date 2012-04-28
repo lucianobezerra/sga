@@ -2,6 +2,8 @@
 require_once("class/Sessao.class.php");
 require_once("class/Valida.class.php");
 
+define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
+define('ROOT_IMP', ROOT_APP . "/importar");
 $session = new Session();
 $session->start();
 $logado = $session->getNode("id_operador");
@@ -27,9 +29,10 @@ if (!$valida->validaSistema()) {
     <script type='text/javascript' src='js/jquery.form.js'></script>
     <script type='text/javascript' src='js/jquery.maskedinput-1.3.min.js'></script>
     <script type='text/javascript' src='js/jquery.cycle.all.js'></script>
+    <script type='text/javascript' src='js/ajaxupload.js'></script>
     <script type='text/javascript'>
       $(function(){
-        $('#top').cycle({ fx: 'fade', height: 120, width: 777 });
+        //$('#top').cycle({ fx: 'fade', height: 120, width: 777 });
         $('#right').load("home.php");
 
         $('dd:not(:first)').hide();
@@ -61,10 +64,11 @@ if (!$valida->validaSistema()) {
   <body>
     <div id="container">
       <div id="top">
-<!--        <img src="imagens/banner_topo_p_1.jpg"/>
-        <img src="imagens/banner_topo_p_2.jpg"/> -->
-        <img src="imagens/banner_topo_p_3.jpg"/>
-<!--        <img src="imagens/banner_topo_p_4.jpg"/> -->
+        <!-- <img src="imagens/banner_topo_p_1.jpg"/> -->
+        <!-- <img src="imagens/banner_topo_p_2.jpg"/> -->
+        <!-- <img src="imagens/banner_topo_p_3.jpg"/> -->
+        <img src="imagens/nova_logo.png"/>
+        <!-- <img src="imagens/banner_topo_p_4.jpg"/> -->
       </div>
       <div id="left" style="height: 420px;"><?php include 'menus.php'; ?></div>
       <div id="right" style="overflow: auto; height: 400px"></div>

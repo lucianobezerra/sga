@@ -1,0 +1,263 @@
+100001Atendimento em presídio até 100 presos                                                                                                                201203
+160001Teleconsultoria Assíncrona                                                                                                                            201203
+102001Estratégia de Agentes Comunitários de Saúde - EACS                                                                                                    201203
+103001Ambulância de transporte                                                                                                                              201203
+104001Central de Regulação de Internações Hospitalares                                                                                                      201203
+105001Neurocirurgia do trauma e anomalias do desenvolvimento                                                                                                201203
+106001Testagem e aconselhamento                                                                                                                             201203
+107001Serviço de Atenção à Saúde Auditiva na Média Complexidade                                                                                             201203
+108001Atendimento/acompanhamento em saúde do trabalhador                                                                                                    201203
+109001Unidade sócio-educativa com até 40 adolecentes                                                                                                        201203
+110001Atenção à infertilidade                                                                                                                               201203
+111001Diagnóstico e tratamento                                                                                                                              201203
+112001Acompanhamento do pré-natal de baixo risco                                                                                                            201203
+113001Assitência Domiciliar                                                                                                                                 201203
+114001Dentística                                                                                                                                            201203
+115001Residência terapêutica em saúde mental                                                                                                                201203
+116001Eletrofisiologia                                                                                                                                      201203
+117001Tratamento da lipodistrofia do portador de HIV / AIDS                                                                                                 201203
+118001Cirurgia torácica                                                                                                                                     201203
+119001Abordagem e tratamento do fumante                                                                                                                     201203
+120001Exames anatomopatológicos                                                                                                                             201203
+121001Radiologia                                                                                                                                            201203
+122001Teste Ergométrico                                                                                                                                     201203
+123001OPM auxiliares de locomoção                                                                                                                           201203
+124001Diagnóstico/Tratamento das doenças endócrinas, metabólicas e nutricionais                                                                             201203
+125001Dispensação de Medicamentos do Componente Especializado da Assistência Farmaceutica.                                                                  201203
+126001Assistência fisioterapêutica em alterações obstétricas, neonatais e uroginecológicas                                                                  201203
+127001Tratamento clínico, reparador e acompanhamento ao paciente                                                                                            201203
+128001Procedimentos destinados à obtenção do sangue para fins de assitência hemoterápica                                                                    201203
+129001Exames de histocompatibilidade por meio de sorologia                                                                                                  201203
+130001Tratamento dialítico                                                                                                                                  201203
+131001Diagnóstico em oftalmologia                                                                                                                           201203
+132001Oncologia pediátrica                                                                                                                                  201203
+133001Tratamento de Doenças das Vias Aéreas Inferiores                                                                                                      201203
+134001Acupuntura                                                                                                                                            201203
+135001Reabilitação visual                                                                                                                                   201203
+136001Enteral                                                                                                                                               201203
+137001Exame eletrocardiográfico por telemedicina                                                                                                            201203
+138001Diagnóstico e tratamento em cintura escapular                                                                                                         201203
+139001Tratamento de recém-nascido com hipotireoidismo e fenilcetonuria                                                                                      201203
+140001Pronto Socorro Geral                                                                                                                                  201203
+141001Vigilância epidemiológica                                                                                                                             201203
+142001Do aparelho digestivo                                                                                                                                 201203
+143001Transporte terrestre                                                                                                                                  201203
+144001Coleta realizada fora das estrutura laboratorial                                                                                                      201203
+145001Exames bioquímicos                                                                                                                                    201203
+146001Diagnóstica                                                                                                                                           201203
+147001NASF 1                                                                                                                                                201203
+148001Saúde mental                                                                                                                                          201203
+149001Rim                                                                                                                                                   201203
+150001Fístula arteriovenosa sem enxerto                                                                                                                     201203
+151001Medicina nuclear in vivo                                                                                                                              201203
+153001Serviço de assistência aos individuos que possuem indicação para realização do processo transexualizador                                              201203
+154001Banco de valvula cardiaca humana                                                                                                                      201203
+155001Serviço de Traumatologia e Ortopedia                                                                                                                  201203
+156001Atenção as Pessoas Ostomizadas I                                                                                                                      201203
+157001Laboratorio Regional de Protese Dentaria                                                                                                              201203
+158001Serviço de Atenção Integral em Hanseniase Tipo I                                                                                                      201203
+159001Atenção Básica                                                                                                                                        201203
+101001Saúde da família                                                                                                                                      201203
+100002Atendimento em manicômio até 100 presos                                                                                                               201203
+160002Teleconsultoria Síncrona                                                                                                                              201203
+102002Estratégia de Agentes Comunitários de Saúde com Saúde Bucal - (modalidade I)                                                                          201203
+103002Ambulância de suporte básico de vida                                                                                                                  201203
+104002Cental de Regulação de Consultas e Exames                                                                                                             201203
+105002Coluna e nervos periféricos                                                                                                                           201203
+106002Diagnóstico e tratamento                                                                                                                              201203
+107002Serviço de Atenção à Saúde Auditiva na Alta Complexidade                                                                                              201203
+108002Centro de referência em saúde do trabalhador CEREST estadual                                                                                          201203
+109002Unidade sócio-educativa com de 41 a 100 adolecentes                                                                                                   201203
+110002Contracepção clínica                                                                                                                                  201203
+111002Tratamento multidrogas resistentes                                                                                                                    201203
+112002Acompanhamento do pré-natal de alto risco                                                                                                             201203
+113002Internação Domiciliar                                                                                                                                 201203
+114002Endodontia                                                                                                                                            201203
+115002Atendimento psicossocial                                                                                                                              201203
+116002Cirurgia cardiovascular (adulto)                                                                                                                      201203
+117002Tratamento em queimados                                                                                                                               201203
+120002Exames citopatológicos                                                                                                                                201203
+121002Ultra-sonografia                                                                                                                                      201203
+122002Teste de Holter                                                                                                                                       201203
+123002OPM ortopédicas                                                                                                                                       201203
+124002Cirurgia de glândulas endócrinas                                                                                                                      201203
+125002Farmácia Popular                                                                                                                                      201203
+126002Assistência fisioterapêutica em alterações oncológicas                                                                                                201203
+128002Diagnóstico em hemoterapia                                                                                                                            201203
+129002Exames de histocompatibilidade por sorologia e biologia                                                                                               201203
+130002Litotripsia                                                                                                                                           201203
+131002Tratamento clínico do aparelho da visão                                                                                                               201203
+132002Hematologia                                                                                                                                           201203
+133002Diagnóstico em Pneumologia                                                                                                                            201203
+134002Fitoterapia                                                                                                                                           201203
+135002Reabilitação mental/autismo                                                                                                                           201203
+136002Enteral/Parenteral                                                                                                                                    201203
+138002Diagnóstico e tratamento em membros superiores                                                                                                        201203
+139002Tratamento de recém-nascido com doenças falciformes                                                                                                   201203
+140002Pronto Socorro Especializado                                                                                                                          201203
+141002Vigilância sanitária                                                                                                                                  201203
+142002Do aparelho respiratório                                                                                                                              201203
+143002Transporte aéreo                                                                                                                                      201203
+145002Exames hematológicos e hemostasia                                                                                                                     201203
+146002Cirúrgica                                                                                                                                             201203
+147002NASF 2                                                                                                                                                201203
+148002AIDS                                                                                                                                                  201203
+149002Medula óssea                                                                                                                                          201203
+150002Fístula arteriovenosa com enxerto                                                                                                                     201203
+151002Medicina nuclear in vitro                                                                                                                             201203
+154002Banco de tecido musculo esqueletico                                                                                                                   201203
+155002Serviço de Traumatologia e Ortopedia Pediátrica (até 21 anos de idade)                                                                                201203
+156002Atenção as Pessoas Ostomizadas II                                                                                                                     201203
+158002Serviço de Atenção Integral em Hanseniase Tipo II                                                                                                     201203
+159002Atenção Básica com Saúde Bucal                                                                                                                        201203
+101002Saúde bucal MI                                                                                                                                        201203
+100003Atendimento em presídio acima de 100 presos                                                                                                           201203
+101003Saúde bucal MII                                                                                                                                       201203
+102003Estratégia de Agentes Comunitários de Saúde com Saúde Bucal - (modalidade II)                                                                         201203
+103003Ambulância de suporte avançado de vida                                                                                                                201203
+104003Central de Regulação de Urgências                                                                                                                     201203
+105003Tumores do sistema nervoso                                                                                                                            201203
+106003Diagnóstico, tratamento e capacitação técnica                                                                                                         201203
+107003Terapia fonoaudiológica                                                                                                                               201203
+109003Unidade sócio-educativa com de 101 a 180 adolecentes                                                                                                  201203
+110003Laqueadura                                                                                                                                            201203
+112003Parto em gestação de baixo risco                                                                                                                      201203
+113003Equipe Multiprofissional de Atenção Domiciliar-EMAD                                                                                                   201203
+114003Periodontia clínica                                                                                                                                   201203
+116003Cirurgia cardiovascular (criança)                                                                                                                     201203
+117003Tratamento da lipoatrofia facial do portador de HIV / AIDS                                                                                            201203
+121003Tomografia computadorizada                                                                                                                            201203
+122003Exame Eletrocardiográfico                                                                                                                             201203
+123003OPM auditivas                                                                                                                                         201203
+125003Farmácia com manipulação homeopática                                                                                                                  201203
+126003Assistência fisioterapêutica em oftalmologia                                                                                                          201203
+128003Procedimentos especiais em hemoterapia                                                                                                                201203
+130003Confeccção/Intervenção de acessos para diálise                                                                                                        201203
+131003Tratamento cirúrgico do aparelho da visão                                                                                                             201203
+132003Oncologia clínica                                                                                                                                     201203
+133003Diagnóstico em Pneumologia por Telemedicina                                                                                                           201203
+134003Outras técnicas em medicina tradicional chinesa                                                                                                       201203
+135003Reabilitação física                                                                                                                                   201203
+136003Enteral/Parenteral, com manipulação/fabricação                                                                                                        201203
+138003Diagnóstico e tratamento em coluna vertebral e caixa torácica                                                                                         201203
+139003Tratamento de recém-nascido com fibrose cística                                                                                                       201203
+140003Pronto Atendimento                                                                                                                                    201203
+141003Vigilância ambiental                                                                                                                                  201203
+142003Do aparelho urinário                                                                                                                                  201203
+143003Transporte marítimo                                                                                                                                   201203
+145003Exames sorológicos e imunológicos                                                                                                                     201203
+148003Geriátrico                                                                                                                                            201203
+149003Coração                                                                                                                                               201203
+151003Medicina nuclear in vivo por telemedicina                                                                                                             201203
+155003Serviço de Traumatologia e Ortopedia de Urgência                                                                                                      201203
+158003Serviço de Atenção Integral em Hanseniase Tipo III                                                                                                    201203
+160003Segunda Opinião Formativa                                                                                                                             201203
+135004Reabilitação visual/mental/múltiplas deficiências                                                                                                     201203
+134004Práticas corporais/Atividade física                                                                                                                   201203
+139004Tratamento de recém-nascido com outras doenças congênitas                                                                                             201203
+141004Núcleo de vigilância hospitalar                                                                                                                       201203
+142004Do aparelho ginecológico                                                                                                                              201203
+145004Exames coprológicos                                                                                                                                   201203
+148004Fibrose cística                                                                                                                                       201203
+149004Pulmão                                                                                                                                                201203
+100004Atendimento em manicômio acima de 100 presos                                                                                                          201203
+103004Aeronave de transporte médico                                                                                                                         201203
+104004Unidade de autorizações de TFD intermunicipais                                                                                                        201203
+105004Neurocirurgia vascular                                                                                                                                201203
+107004Diagnóstico em audiologia/otologia                                                                                                                    201203
+109004Unidade sócio-educativa com mais de 180 adolecentes                                                                                                   201203
+110004Vasectomia                                                                                                                                            201203
+112004Parto em gestação de alto risco                                                                                                                       201203
+113004Equipe Multiprofissional-AD                                                                                                                           201203
+114004Moldagem/Manutenção                                                                                                                                   201203
+116004Cirurgia vascular                                                                                                                                     201203
+121004Ressonância magnética                                                                                                                                 201203
+122004Exame Eletroencefalográfico                                                                                                                           201203
+123004OPM oftalmológicas                                                                                                                                    201203
+125004Dispensação de medicamentos estratégicos                                                                                                              201203
+126004Assistência fisioterapêutica cardiovasculares e pneumo-funcionais                                                                                     201203
+128004Medicina transfusional                                                                                                                                201203
+130004Tratamento em nefrologia em geral                                                                                                                     201203
+131004Projeto Olhar Brasil                                                                                                                                  201203
+132004Radioterapia                                                                                                                                          201203
+138004Diagnóstico e tratamento em cintura pélvica                                                                                                           201203
+138005Diagnóstico e tratamento em membros inferiores                                                                                                        201203
+145005Exames de uroanálise                                                                                                                                  201203
+148005Cirúrgico / Diagnóstico                                                                                                                               201203
+149005Córnea / Esclera                                                                                                                                      201203
+103005Embarcação de transporte médico                                                                                                                       201203
+104005Unidade de autorizações de TFD interestaduais                                                                                                         201203
+105005Tratamento neurocirúrgico da dor funcional                                                                                                            201203
+107005Implante Coclear                                                                                                                                      201203
+112005Centro de parto normal                                                                                                                                201203
+114005Cirurgia oral                                                                                                                                         201203
+116005Cardiologia intervencionista (hemodinâmica)                                                                                                           201203
+122005Teste Ergométrico por Telemedicina                                                                                                                    201203
+123005OPM em gastroenterologia                                                                                                                              201203
+125005Dispensação de medicamentos básicos                                                                                                                   201203
+126005Assistência fisioterapêutica nas disfunções músculo-esqueléticas (todas as origens)                                                                   201203
+131005Diagnóstico em Oftalmologia por Telemedicina                                                                                                          201203
+132005Oncologia cirúrgica                                                                                                                                   201203
+134005Homeopatia                                                                                                                                            201203
+107006Triagem Auditiva Neonatal                                                                                                                             201203
+114006Cirurgia buco-maxilo-facial                                                                                                                           201203
+105006Investigação e cirurgia de epilepsia                                                                                                                  201203
+104006Central Estadual de Regulação da Alta Complexidade                                                                                                    201203
+125006Farmácia Hospitalar                                                                                                                                   201203
+123006OPM em urologia                                                                                                                                       201203
+148006Acompanhamento pós-transplante de medula óssea                                                                                                        201203
+149006Fígado                                                                                                                                                201203
+126006Assistência fisioterapêutica em queimados                                                                                                             201203
+122006Teste Holter por Telemedicina                                                                                                                         201203
+121006Radiologia intervencionista                                                                                                                           201203
+103006Veículos de intervenção rápida                                                                                                                        201203
+145006Exames hormonais                                                                                                                                      201203
+116006Endovascular extracardíaca                                                                                                                            201203
+134006Termalismo/Crenoterapia                                                                                                                               201203
+105007Tratamento endovascular                                                                                                                               201203
+103007Outros veículos                                                                                                                                       201203
+149007Pâncreas                                                                                                                                              201203
+145007Exames de  vigilância epidemiológica e  ambiental                                                                                                     201203
+134007Medicina antroposófica                                                                                                                                201203
+126007Assistência fisioterapêutica nas alterações em neurologia                                                                                             201203
+123007OPM em odontologia                                                                                                                                    201203
+122007Exame Eletrocardiografico por Telemedicina                                                                                                            201203
+121007Radiologia por telemedicina                                                                                                                           201203
+107007Diagnóstico em Audiologia/Otologia po Telemedicina                                                                                                    201203
+121008Ultra-sonografia por telemedicina                                                                                                                     201203
+105008Neurocirurgia funcional estereotáxica                                                                                                                 201203
+123008OPM buco-maxilo-facial                                                                                                                                201203
+103008Ambulância de resgate                                                                                                                                 201203
+126008Diagnóstico cinético funcional                                                                                                                        201203
+122008Exame Eletroencefalografico por Telemedicina                                                                                                          201203
+145008Exames toxicológicos ou de monitorização terapêutica                                                                                                  201203
+149008Retirada de orgãos                                                                                                                                    201203
+122009Exame Eletroneuromiografia                                                                                                                            201203
+149009Pele                                                                                                                                                  201203
+103009Aeronave de asa fixa de transporte médico                                                                                                             201203
+145009Exames microbiológicos                                                                                                                                201203
+121009Tomografia computadorizada por telemedicina                                                                                                           201203
+105009Polissonografia                                                                                                                                       201203
+123009Substituição/Troca em órteses/próteses                                                                                                                201203
+122010Exame videoeletroencefalografia                                                                                                                       201203
+123010OPM em queimados                                                                                                                                      201203
+121010Ressonância magnética por telemedicina                                                                                                                201203
+149010Válvulas cardíacas                                                                                                                                    201203
+103010Moto de intervenção rápida                                                                                                                            201203
+145010Exames em outros líquidos biológicos                                                                                                                  201203
+149011Osteocondroligamentos                                                                                                                                 201203
+122011Potenciais Evocados                                                                                                                                   201203
+123011OPM em nefrologia                                                                                                                                     201203
+145011Exames de genética                                                                                                                                    201203
+121011Radiologia intervencionista por telemedicina                                                                                                          201203
+145012Exames para triagem neonatal                                                                                                                          201203
+122012Potenciais Evocados por Telemedicina                                                                                                                  201203
+121012Mamografia                                                                                                                                            201203
+123012OPM - Projeto Olhar Brasil                                                                                                                            201203
+149012Separação, avaliação biomicroscópica e conservação da córnea/esclera                                                                                  201203
+121013Mamografia por Telemedicina                                                                                                                           201203
+149013Contagem endotelial corneana                                                                                                                          201203
+145013Exames imunohematológicos                                                                                                                             201203
+149014Acompanhamento de paciente transplantado                                                                                                              201203
+149015Ações para doação e captação de órgãos e tecidos                                                                                                      201203
+149016Retirada de globo ocular humano para transplante                                                                                                      201203

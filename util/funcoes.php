@@ -1,10 +1,9 @@
 <?php
 
-//define('DS', DIRECTORY_SEPARATOR);
 require_once(dirname(dirname(__FILE__)) . '/class/Sessao.class.php');
 require_once(dirname(dirname(__FILE__)) . '/class/Operador.class.php');
 
-function retornaNivel(){
+function retornaNivel() {
   $session = new Session();
   $session->start();
   $usuario = $session->getNode("id_operador");
@@ -15,7 +14,6 @@ function retornaNivel(){
   $nivel = $operador->retornaDados("array");
   return $nivel['nivel'];
 }
-
 
 function formata_competencia($strDate) {
   $arrMonthsOfYear = array(1 => 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
@@ -62,6 +60,22 @@ function decode5t($str) {
     $str = base64_decode(strrev($str)); //apply base64 first and then reverse the string}
   }
   return $str;
+}
+
+function abreArquivo($nomeDoCampo) {
+  $nometmp = $_FILES[$nomeDoCampo][tmp_name];
+  if ($nometmp != "") {
+    $handle = fopen($nometmp, "r");
+    return $nometmp;
+  } else {
+    return false;
+  }
+}
+
+function removerAcento($str) {
+  $from = 'ÀÁÃÂÉÊÍÓÕÔÚÜÇàáãâéêíóõôúüç';
+  $to = 'AAAAEEIOOOUUCaaaaeeiooouuc';
+  return strtr($str, $from, $to);
 }
 
 ?>

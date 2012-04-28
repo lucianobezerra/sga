@@ -1,9 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . DS . 'class' . DS . 'Operador.class.php');
-require_once(dirname(__FILE__) . DS . 'util' . DS . 'funcoes.php');
-
-$nivel = retornaNivel();
-
+require_once(dirname(__FILE__) . '/class/Operador.class.php');
+require_once(dirname(__FILE__) . '/util/funcoes.php');
 ?>
 <dl>
   <dt id="inicio"><a href="home.php">Início</a></dt>
@@ -37,6 +34,7 @@ $nivel = retornaNivel();
   <dd>
     <ul>
       <li><a href="views/manutencao/alterar_senha.php">Alterar Senha</a></li>
+      <li><a href="views/manutencao/index.php">Atualizar Tabelas</a></li>
     </ul>
   </dd>
   <dt><a class="sair" href="sair.php">Sair do Sistema</a></dt>
