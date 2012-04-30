@@ -34,7 +34,7 @@ require_once(dirname(__FILE__) . '/util/funcoes.php');
   <dd>
     <ul>
       <li><a href="views/manutencao/alterar_senha.php">Alterar Senha</a></li>
-      <li><a href="views/manutencao/index.php">Atualizar Tabelas</a></li>
+      <li><a href="views/manutencao/atualiza_tabelas.php">Atualizar Tabelas</a></li>
     </ul>
   </dd>
   <dt><a class="sair" href="sair.php">Sair do Sistema</a></dt>

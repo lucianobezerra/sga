@@ -1,5 +1,0 @@
-01Ambulatorial                                                                                        201203
-02Hospitalar                                                                                          201203
-03Hospital Dia                                                                                        201203
-04Internação Domiciliar                                                                               201203
-05Assistência Domiciliar                                                                              201203
