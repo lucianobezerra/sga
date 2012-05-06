@@ -27,6 +27,11 @@ class Competencia extends Base {
             where {$objeto->campopk}=$objeto->valorpk";
     return $this->executaSql($sql);
   }
+  
+  public function strCompetencia($objeto){
+    $sql = "select ano||mes as cmpt from {$objeto->tabela} where {$objeto->campopk} = {$objeto->valorpk}";
+    return $this->executaSql($sql);
+  }
 
 }
 

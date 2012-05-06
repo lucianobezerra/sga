@@ -35,7 +35,7 @@ abstract class Banco {
       $linha = 'Não Informada';
     }
     if ($mensagemErro == null) {
-      $mensagemErro = pg_errormessage($this->conexao);
+      $mensagemErro = pg_last_error($this->conexao);
     }
     $resultado = "Ocorreu um erro com os seguintes detalhes<br/>
                 <strong>Arquivo: </strong>{$arquivo}<br/>

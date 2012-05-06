@@ -7,14 +7,14 @@ dl {
   width:200px
 }
 dt {
-  background-color:#CC3300;
+  background-color: #D0DFE8; /*#CC3300; */
   border-bottom:1px solid #fff;
   font-size: 12pt;
   font-family: arial, helvetica, serif;
   padding:2px
 }
 dt a {
-  color:#fff;
+  color:#000;
 }
 dd, ul {
   margin:0;

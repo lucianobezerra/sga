@@ -7,18 +7,18 @@ require_once(dirname(__FILE__) . '/util/funcoes.php');
   <dt><a href="#">Tabelas Básicas</a></dt>
   <dd>
     <ul>
-      <li><a href="views/procedimentos/index.php">Procedimentos</a></li>
-      <li><a href="views/diagnosticos/index.php">Diagnósticos</a></li>
+      <li><a href="views/tipos/index.php">Tipos de Autorização</a></li>
     </ul>
   </dd>
   <dt><a href="#">Cadastros</a></dt>
   <dd>
     <ul>
+      <li><a href="views/operadores/index.php">Operadores</a></li>
       <li><a href="views/estabelecimentos/index.php">Estabelecimentos</a></li>
       <li><a href="views/competencias/index.php">Competências</a></li>
-      <li><a href="views/tipos/index.php">Tipos de Autorização</a></li>
+      <li><a href="views/solicitantes/index.php">Solicitantes</a></li>
+      <li><a href="views/autorizadores/index.php">Autorizadores</a></li>
       <li><a href="views/faixas/index.php">Faixas de Autorização</a></li>
-      <li><a href="views/operadores/index.php">Operadores</a></li>
     </ul>
   </dd>
   <dt><a href="#">Autorização</a></dt>

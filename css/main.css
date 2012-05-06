@@ -53,8 +53,8 @@ form.unidade {
   border-width: 1px;
 }
 .botao {
-  background-color: #CC3300;
-  color: #CCFFFF;
+  background-color: #D0DFE8 /* #CC3300; */;
+  color: #000; /* #CCFFFF; */
 }
 
 #container {

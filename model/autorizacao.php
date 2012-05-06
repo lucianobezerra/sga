@@ -1,19 +1,26 @@
-<?php
-require('../class/Autorizacao.class.php');
-require('../class/Sessao.class.php');
-require('../class/Permissao.class.php');
-require('../util/funcoes.php');
 
-$acao  = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
-$id    = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+<?php
+if(defined('ROOT_APP') == false){
+  define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
+}
+
+require(ROOT_APP. '/util/funcoes.php');
+require(ROOT_APP. '/class/Procedimento.class.php');
+require(ROOT_APP. '/class/ProcedimentoDetalhe.class.php');
+require(ROOT_APP. '/class/Competencia.class.php');
+require(ROOT_APP. '/class/Permissao.class.php');
+require(ROOT_APP. '/class/Autorizacao.class.php');
+
+$acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 $valor = isset($_POST['searchField']) ? $_POST['searchField'] : null;
 
 switch ($acao) {
-  case "inserir": inserir();          break;
-  case "alterar": alterar($id);       break;
-  case "listagem": listagem();        break;
-  case "localiza": localiza($valor);  break;
-  case "exibir": exibir($id);         break;
+  case "inserir": inserir();    break;
+  case "alterar": alterar($id);    break;
+  case "listagem": listagem();    break;
+  case "localiza": localiza($valor);    break;
+  case "exibir": exibir($id);    break;
 }
 
 function exibir($id) {
@@ -58,26 +65,68 @@ function exibir($id) {
       <td><?= ConverteDataParaBR($linha['internacao']); ?> </td>
     </tr>
   </table>
-<?
+  <?
+}
+
+function exigeCartaoSUS($procedimento, $cmpt) {
+  $cp = new Competencia();
+  $cp->valorpk = $cmpt;
+  $cp->strCompetencia($cp);
+  $strCmpt = '';
+  while ($s = $cp->retornaDados("array")) {
+    $strCmpt = $s[0];
+  }
+
+  $pd = new ProcedimentoDetalhe();
+  $pd->extras_select = "where codigo_procedimento = '{$procedimento}' and cmpt = '{$strCmpt}'";
+  $pd->exigeCNS($pd);
+  $retorno = '';
+  while ($s = $pd->retornaDados("array")) {
+    $retorno = $s[0];
+  }
+  if ($retorno > 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function inserir() {
+  if (exigeCartaoSus($_POST['id_procedimento'], $_POST['id_competencia']) == true) {
+    if((validaCNS($_POST['cns']) == false) || (validaCNS_PROVISORIO($_POST['cns']) == false)){
+      echo "Cartão SUS inválido ou não informado!";
+      exit;
+    }
+  }
   $autorizacao = new Autorizacao();
   $autorizacao->delCampo("digito");
+  $autorizacao->delCampo("data_emissao");
   $numero = $autorizacao->proxima($_POST['id_faixa']);
   $digito = (fmod($numero, 11) == 10) ? 0 : fmod($numero, 11);
-  $autorizacao->setValor("id_competencia", $_POST['id_competencia']);
+  $autorizacao->setValor("numero",             $numero);
+  $autorizacao->setValor("id_competencia",     $_POST['id_competencia']);
   $autorizacao->setValor("id_estabelecimento", $_POST['id_estabelecimento']);
-  $autorizacao->setValor("id_faixa", $_POST['id_faixa']);
-  $autorizacao->setValor("id_operador", $_POST['id_operador']);
-  $autorizacao->setValor("id_tipo", $_POST['id_tipo']);
-  $autorizacao->setValor("numero", $numero);
-  $autorizacao->setValor("internacao", ConverteDataParaEUA($_POST['internacao']));
-  $autorizacao->setValor("nascimento", ConverteDataParaEUA($_POST['nascimento']));
-  $autorizacao->setValor("nome_pac", strtoupper($_POST['nome_paciente']));
+  $autorizacao->setValor("id_faixa",           $_POST['id_faixa']);
+  $autorizacao->setValor("id_operador",        $_POST['id_operador']);
+  $autorizacao->setValor("id_tipo",            $_POST['id_tipo']);
+  $autorizacao->setValor("id_autorizador",     $_POST['id_autorizador']);
+  $autorizacao->setValor("id_solicitante",     $_POST['id_solicitante']);
+  $autorizacao->setValor("id_municipio",       $_POST['id_municipio']);
+  $autorizacao->setValor("id_procedimento",    $_POST['id_procedimento']);
+  $autorizacao->setValor("id_diagnostico",     $_POST['id_diagnostico']);
+  $autorizacao->setValor("cartao_sus",         $_POST['cns']);
+  $autorizacao->setValor("nome_paciente",      strtoupper($_POST['nome_paciente']));
+  $autorizacao->setValor("nome_da_mae",        strtoupper($_POST['nome_mae']));
+  $autorizacao->setValor("nome_responsavel",   strtoupper($_POST['nome_responsavel']));
+  $autorizacao->setValor("sexo",               strtoupper($_POST['sexo']));
+  $autorizacao->setValor("endereco",           strtoupper($_POST['endereco']));
+  $autorizacao->setValor("bairro",             strtoupper($_POST['bairro']));
+  $autorizacao->setValor("cep",                str_replace('-', '', $_POST['cep']));
+  $autorizacao->setValor("raca_cor",           $_POST['raca_cor']);
+  $autorizacao->setValor("data_autoriza",      ConverteDataParaEUA($_POST['data_autoriza']));
+  $autorizacao->setValor("data_nascimento",    ConverteDataParaEUA($_POST['data_nascimento']));
   if ($autorizacao->inserir($autorizacao) == 1) {
-    $retorno = substr($numero, 0, 2) . '.' . substr($numero, 2, 2) . '.' . substr($numero, 4, 1) . '.' . substr($numero, 5, 7);
-    echo "AUTORIZAÇÃO: {$retorno}-{$digito}";
+    echo $numero."-".$digito;
   }
 }
 
@@ -87,13 +136,13 @@ function listagem() {
   $cmpt = $session->getNode("id_competencia");
 
   $operador = $_POST['_operador'];
-  $unidade  = $_POST['_estabelecimento'];
-  $tipo     = $_POST['_tipo'];
-  
-  $and_operador = ($_POST['_operador'] == 999)        ? "" : "and id_operador={$operador}";
-  $and_unidade  = ($_POST['_estabelecimento'] == 999) ? "" : "and id_estabelecimento={$unidade}";
-  $and_tipo     = ($_POST['_tipo'] == 999)            ? "" : "and id_tipo={$tipo}";
-  
+  $unidade = $_POST['_estabelecimento'];
+  $tipo = $_POST['_tipo'];
+
+  $and_operador = ($_POST['_operador'] == 999) ? "" : "and id_operador={$operador}";
+  $and_unidade = ($_POST['_estabelecimento'] == 999) ? "" : "and id_estabelecimento={$unidade}";
+  $and_tipo = ($_POST['_tipo'] == 999) ? "" : "and id_tipo={$tipo}";
+
   $autorizacao = new Autorizacao();
   $autorizacao->extras_select = "where id_competencia={$cmpt} {$and_unidade} {$and_operador} {$and_tipo}";
   $autorizacao->selecionaTudo($autorizacao);
@@ -106,74 +155,76 @@ function listagem() {
       <td style="width: 18%; text-align: center">Autorização</td>
       <td style="width: 54%">Paciente</td>
       <td style="width: 14%; text-align: center">Nascimento</td>
-      <td style="width: 14%; text-align: center">Internação</td>
+      <td style="width: 14%; text-align: center">Autorização</td>
     </tr> 
-  <? while($linha = $autorizacao->retornaDados()){ ?>
+    <? while ($linha = $autorizacao->retornaDados()) { ?>
       <tr>
-        <td style="text-align: center"><?=$linha->numero.$linha->digito ?></td>
-        <td style="text-align: left"  ><?=$linha->nome_pac ?></td>
-        <td style="text-align: center"><?=ConverteDataParaBR($linha->nascimento) ?></td>
-        <td style="text-align: center"><?=ConverteDataParaBR($linha->internacao) ?></td>
+        <td style="text-align: center"><?= $linha->numero . $linha->digito ?></td>
+        <td style="text-align: left"  ><?= $linha->nome_paciente ?></td>
+        <td style="text-align: center"><?= ConverteDataParaBR($linha->data_nascimento) ?></td>
+        <td style="text-align: center"><?= ConverteDataParaBR($linha->data_autoriza) ?></td>
       </tr>
-  <? }
+      <?
+    }
     echo "</table>";
   }
 
-function localiza($valor) {
-  $where = '';
-  $session = new Session();
-  $session->start();
-  $operador = $session->getNode("id_operador");
+  function localiza($valor) {
+    $where = '';
+    $session = new Session();
+    $session->start();
+    $operador = $session->getNode("id_operador");
 
-  $where .= is_numeric($valor) ? "where numero = $valor " : "where upper(nome_pac) like upper('%$valor%') ";
-  $hist = isset($_POST['historico']) ? $_POST['historico'] : null;
-  if (!$hist):
-    $cmpt = $session->getNode("id_competencia");
-    $where .= "and id_competencia={$cmpt}";
-  endif;
+    $where .= is_numeric($valor) ? "where numero = $valor " : "where upper(nome_pac) like upper('%$valor%') ";
+    $hist = isset($_POST['historico']) ? $_POST['historico'] : null;
+    if (!$hist):
+      $cmpt = $session->getNode("id_competencia");
+      $where .= "and id_competencia={$cmpt}";
+    endif;
 
-  $autorizacao = new Autorizacao();
-  $autorizacao->extras_select = $where;
-  $autorizacao->selecionaTudo($autorizacao);
-  ?>
-  <table  id='dados' border='1' style='width: 100%; margin-top: 15px;'>
-    <tr style="background: #f90;">
-      <th colspan='4' style='text-align:center;'>AUTORIZAÇÕES LOCALIZADAS</th>
-    </tr>
-    <tr style="background: #ffb;">
-      <td style="width: 18%; text-align: center">Autorização</td>
-      <td style="width: 54%">Paciente</td>
-      <td style="width: 14%; text-align: center">Nascimento</td>
-      <td style="width: 14%; text-align: center">Internação</td>
-    </tr>
-        <?
-            $permissao = new Permissao();
-            while ($linha = $autorizacao->retornaDados()) {
-         ?>
-      <tr>
-        <td style="text-align: center"><a class='show' href='#' onclick='exibir(<?= $linha->id ?>)' title="Detalhar"><?= "{$linha->numero}-{$linha->digito}" ?></a> </td>
-        <td>
-    <?php
-    $possui_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
-    echo ($possui_permissao == true) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
+    $autorizacao = new Autorizacao();
+    $autorizacao->extras_select = $where;
+    $autorizacao->selecionaTudo($autorizacao);
     ?>
-        </td>
-        <td style="text-align: center"><?= ConverteDataParaBR($linha->nascimento) ?> </td>
-        <td style="text-align: center"><?= ConverteDataParaBR($linha->internacao) ?> </td>
+    <table  id='dados' border='1' style='width: 100%; margin-top: 15px;'>
+      <tr style="background: #f90;">
+        <th colspan='4' style='text-align:center;'>AUTORIZAÇÕES LOCALIZADAS</th>
       </tr>
-  <?
-  }
-  echo "</table>";
-}
+      <tr style="background: #ffb;">
+        <td style="width: 18%; text-align: center">Autorização</td>
+        <td style="width: 54%">Paciente</td>
+        <td style="width: 14%; text-align: center">Nascimento</td>
+        <td style="width: 14%; text-align: center">Internação</td>
+      </tr>
+      <?
+      $permissao = new Permissao();
+      while ($linha = $autorizacao->retornaDados()) {
+        ?>
+        <tr>
+          <td style="text-align: center"><a class='show' href='#' onclick='exibir(<?= $linha->id ?>)' title="Detalhar"><?= "{$linha->numero}-{$linha->digito}" ?></a> </td>
+          <td>
+            <?php
+            $possui_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
+            echo ($possui_permissao == true) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
+            ?>
+          </td>
+          <td style="text-align: center"><?= ConverteDataParaBR($linha->nascimento) ?> </td>
+          <td style="text-align: center"><?= ConverteDataParaBR($linha->internacao) ?> </td>
+        </tr>
+        
+        <?
+      }
+      echo "</table>";
+    }
 
-function alterar($id) {
-  $autorizacao = new Autorizacao();
-  $autorizacao->setValor("nome_pac",   strtoupper($_POST['nome_paciente']));
-  $autorizacao->setValor("nascimento", ConverteDataParaEUA($_POST['nascimento']));
-  $autorizacao->setValor("internacao", ConverteDataParaEUA($_POST['internacao']));
-  $autorizacao->valorpk = $id;
-  $autorizacao->delCampo("numero");
-  $autorizacao->delCampo("digito");
-  $autorizacao->atualizar($autorizacao);
-}
-?>
+    function alterar($id) {
+      $autorizacao = new Autorizacao();
+      $autorizacao->setValor("nome_pac", strtoupper($_POST['nome_paciente']));
+      $autorizacao->setValor("nascimento", ConverteDataParaEUA($_POST['nascimento']));
+      $autorizacao->setValor("internacao", ConverteDataParaEUA($_POST['internacao']));
+      $autorizacao->valorpk = $id;
+      $autorizacao->delCampo("numero");
+      $autorizacao->delCampo("digito");
+      $autorizacao->atualizar($autorizacao);
+    }
+    ?>

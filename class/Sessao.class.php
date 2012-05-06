@@ -3,6 +3,7 @@
 class Session {
 
   public function start() {
+    session_cache_expire(300);
     @session_start();
   }
 

@@ -8,12 +8,7 @@ class Operador extends Base {
     parent::__construct();
     $this->tabela = 'operadores';
     if (sizeof($campos) <= 0) {
-      $this->campos_valores = array(
-          "login" => null,
-          "nome" => null,
-          "senha" => null,
-          "nivel" => null,
-          "ativo" => null);
+      $this->campos_valores = array("login" => null, "nome" => null, "senha" => null, "nivel" => null, "ativo" => null);
     } else {
       $this->campos_valores = $campos;
     }
