@@ -11,9 +11,13 @@ $acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
 $id   = isset($_REQUEST['id'])   ? $_REQUEST['id']   : null;
 
 switch ($acao){
-  case 'inserir': inserir();  break;
-  case 'alterar': alterar($id);  break;
-  case 'excluir': excluir($id);  break;
+  case 'inserir': inserir();    break;
+  case 'alterar': alterar($id); break;
+  case 'excluir': excluir($id); break;
+}
+
+function atualizaSaldo($estabelecimento, $competencia){
+  $sql = "update estabelecimentos set valor_saldo";
 }
 
 function inserir(){
@@ -25,4 +29,16 @@ function inserir(){
   $teto->delCampo("valor_saldo");
   $teto->inserir($teto);
 }
+
+function alterar($id){
+  $teto = new EstabelecimentoTeto();
+  $teto->setValor("valor_teto",         $_POST['valor_teto']);
+  $teto->setValor("valor_medio",        $_POST['valor_medio']);
+  $teto->valorpk = $id;
+  $teto->delCampo("valor_saldo");
+  $teto->delCampo("id_competencia");
+  $teto->delCampo("id_estabelecimento");
+  $teto->atualizar($teto);
+}
+
 ?>

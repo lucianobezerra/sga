@@ -64,7 +64,7 @@ $teto->selecionaTudo($teto);
           <td style='text-align: right;'><?= number_format($linha->valor_teto,  2, ',', '.'); ?></td>
           <td style='text-align: right;'><?= number_format($linha->valor_medio, 2, ',', '.'); ?></td>
           <td style='text-align: right;'><?= number_format($linha->valor_saldo, 2, ',', '.'); ?></td>
-          <td style='text-align: center;'><a class='alterar' href="views/tetos_por_estabelecimento/alterar.php?id=<?=$linha->id; ?>" title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar'/></a></td>
+          <td style='text-align: center;'><a class='alterar' href="views/tetos_por_estabelecimento/alterar.php?id=<?=$linha->id; ?>&id_unidade=<?=$linha->id_estabelecimento; ?>&id_competencia=<?=$id_competencia; ?>" title='Alterar'><img src='imagens/alterar.gif' border='0' alt='Alterar'/></a></td>
           <td style="text-align: center;"><a class="excluir" href="#" onclick="excluir(<?= $linha->id; ?>)" title="Excluir"><img src="imagens/excluir.png" border="0"/></a></td>
           <td style="text-align: center;"><a class="ajustar" href="#" onclick="ajustar(<?= $linha->id; ?>)" title="Ajustar"><img src="imagens/ajustar.png" border="0"/></a></td>
         </tr>

@@ -8,13 +8,8 @@ require_once(ROOT_APP.'/class/EstabelecimentoTeto.class.php');
 
 $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 
-$teto = new EstabelecimentoTeto();
-$teto->valorpk = $id;
-$teto->seleciona($teto);
-
-
-$cmpt = isset($_REQUEST['id_competencia'])     ? $_REQUEST['id_competencia']     : null;
-$ups  = isset($_REQUEST['id_estabelecimento']) ? $_REQUEST['id_estabelecimento'] : null;
+$cmpt = isset($_REQUEST['id_competencia']) ? $_REQUEST['id_competencia'] : null;
+$ups  = isset($_REQUEST['id_unidade'])     ? $_REQUEST['id_unidade']     : null;
 $nome_unidade = null;
 $str_competencia = null;
 
@@ -31,15 +26,20 @@ $competencia->extensoCompetencia($competencia);
 while($linha_competencia = $competencia->retornaDados()){
   $str_competencia = $linha_competencia->cmpt;
 }
+
+$teto = new EstabelecimentoTeto();
+$teto->valorpk = $id;
+$teto->seleciona($teto);
+$linha = $teto->retornaDados("array");
 ?>
 <html>
   <head>
     <script type="text/javascript">
       $(function($){
-        $('form#cadastrar_teto').submit(function(){
+        $('form#alterar_teto').submit(function(){
           $(this).ajaxSubmit(function(retorno){
             if(!retorno){
-              alert('Teto Financeiro Gravado.');
+              alert('Teto Financeiro Atualizado.');
               $('div#right').load("views/tetos_por_estabelecimento/index.php?id_estabelecimento=<?= $cmpt; ?>&id_competencia=<?=$ups ?>");
             } else{
               $('div#mensagem-erro').html(retorno);
@@ -51,16 +51,17 @@ while($linha_competencia = $competencia->retornaDados()){
     </script>
   </head>
   <body>
-    <form name="cadastrar_teto" id="cadastrar_teto" class="campo" action="model/estabelecimento_teto.php?acao=inserir" style="border: none" method="post">
+    <form name="alterar_teto" id="alterar_teto" class="campo" action="model/estabelecimento_teto.php?acao=alterar&id=<?= $linha['id'] ?>" style="border: none" method="post">
       <fieldset style="margin-top: 6px; border: 1px solid; padding: 10px;">
         <legend>CADASTRO DE TETOS FINANCEIROS</legend>
+        <input type="hidden" name="hidden_id" value="<?= $linha->id ?>" />
         <input type="hidden" name="id_competencia" value="<?= $cmpt ?>" />
         <input type="hidden" name="id_unidade"     value="<?= $ups; ?>" />
         Estabelecimento: <?=$nome_unidade; ?><br/>
         Competência: <?= $str_competencia; ?>
-        <label>Valor Teto: <input type="text" name="valor_teto" size="15" class="campo" value="0.00"></label>
-        <label>Valor Médio: <input type="text" name="valor_medio" size="15" class="campo" value="0.00"></label>
-        <label>Valor Saldo: <input type="text" name="valor_saldo" size="15" class="campo" value="0.00" disabled></label>
+        <label>Valor Teto: <input type="text" name="valor_teto" size="15" class="campo" value="<?=$linha['valor_teto']; ?>"></label>
+        <label>Valor Médio: <input type="text" name="valor_medio" size="15" class="campo" value="<?=$linha['valor_medio']; ?>"></label>
+        <label>Valor Saldo: <input type="text" name="valor_saldo" size="15" class="campo" value="<?=$linha['valor_saldo']; ?>" disabled></label>
         <label><input type="submit" value="Gravar" style="width: 85px"></label>
       </fieldset>
     </form>

@@ -10,11 +10,20 @@ if (defined('ROOT_IMP') == false) {
 
 require_once(ROOT_APP . '/util/funcoes.php');
 require_once(ROOT_APP . '/class/Conexao.class.php');
+require_once(ROOT_APP . '/class/Competencia.class.php');
+
+function pegaCompetencia($valor){
+  $cmpt = new Competencia();
+  $cmpt->extras_select = "where ano||mes as cmpt='{$valor}'";
+  $cmpt->seleciona($cmpt);
+  $competencia = $cmpt->retornaDados("array");
+  return $competencia['id'];
+}
 
 
 /* * *************************************************************************************
   Bloco para importar Tabela de Procedimentos
- * ************************************************************************************* *
+ * ************************************************************************************* */
 echo "";
 echo "";
 echo "";
@@ -33,7 +42,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_procedimento.txt', 'r'))) {
                 trim(substr($linha, 292, 10)) / 100,
                 trim(substr($linha, 302, 10)) / 100,
                 trim(substr($linha, 320, 6)),
-                0)));
+                pegaCompetencia(substr($linha, 320, 6)))));
   }
   fclose($arquivo);
 
