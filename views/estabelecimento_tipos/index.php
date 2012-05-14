@@ -1,7 +1,9 @@
 <?php
-define( 'DS', DIRECTORY_SEPARATOR );
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Estabelecimento.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'EstabelecimentoTipo.class.php');
+if (defined('ROOT_APP') == false) {
+  define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
+}
+require_once(ROOT_APP. '/class/Estabelecimento.class.php');
+require_once(ROOT_APP. '/class/EstabelecimentoTipo.class.php');
 $id = $_REQUEST['id_estabelecimento'];
 
 $ups = new Estabelecimento();

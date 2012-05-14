@@ -1,6 +1,5 @@
 <?php
-define( 'DS', DIRECTORY_SEPARATOR );
-require_once(dirname(dirname(dirname(__FILE__))) . DS . 'class' . DS . 'Estabelecimento.class.php');
+require_once(dirname(dirname(dirname(__FILE__))) .'/class/Estabelecimento.class.php');
 
 $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 
@@ -48,32 +47,31 @@ $linha = $ups->retornaDados("array");
           <td><input type="text" name="fantasia" id="fantasia" size="60" maxlength="60" class="campo" required="true" value="<?= $linha['nome_fantasia']; ?>"/></td>
         </tr>
         <tr>
-          <td>Valor Teto</td>
-          <td><input type="text" name="valor_teto" size="15" class="campo" value="<?= $linha['valor_teto']; ?>"/></td>
-        </tr>
-        <tr>
-          <td>Valor Médio (aih)</td>
-          <td><input type="text" name="valor_medio" size="15" class="campo" value="<?= $linha['valor_medio']; ?>"/></td>
-        </tr>
-        <tr>
           <td>Emite AIH?</td>
           <td>
-            Sim <input type="radio" name="aih" id="aih" value="S" class="campo" <?php echo $linha['emite_aih'] == 'S' ? 'checked=checked' : ''; ?>/>
-            Não <input type="radio" name="aih" id="aih" value="N" class="campo" <?php echo $linha['emite_aih'] == 'N' ? 'checked=checked' : ''; ?>/>
+            Sim <input type="radio" name="aih" id="aih" value="true" class="campo" <?php echo ($linha['emite_aih']) == true ? 'checked=checked' : ''; ?>/>
+            Não <input type="radio" name="aih" id="aih" value="false" class="campo" <?php echo ($linha['emite_aih']) == false ? 'checked=checked' : ''; ?>/>
           </td>
         </tr>
         <tr>
           <td>Emite Apac?</td>
           <td>
-            Sim <input type="radio" name="apac" id="apac" value="S" class="campo" <?php echo $linha['emite_apac'] == 'S' ? 'checked=checked' : ''; ?>/>
-            Não <input type="radio" name="apac" id="apac" value="N" class="campo" <?php echo $linha['emite_apac'] == 'N' ? 'checked=checked' : ''; ?>/>
+            Sim <input type="radio" name="apac" id="apac" value="true" class="campo" <?php echo ($linha['emite_apac']) == true ? 'checked=checked' : ''; ?>/>
+            Não <input type="radio" name="apac" id="apac" value="false" class="campo" <?php echo ($linha['emite_apac']) == false ? 'checked=checked' : ''; ?>/>
+          </td>
+        </tr>
+        <tr>
+          <td>Bloqueia Teto?</td>
+          <td>
+            Sim <input type="radio" name="teto" id="apac" value="true" class="campo" <?php echo ($linha['bloqueia_teto']) == true ? 'checked=checked' : ''; ?>/>
+            Não <input type="radio" name="teto" id="apac" value="false" class="campo" <?php echo ($linha['bloqueia_teto']) == false ? 'checked=checked' : ''; ?>/>
           </td>
         </tr>
         <tr>
           <td>Ativo?</td>
           <td>
-            Sim <input type="radio" name="ativo" id="ativo" value="true" class="campo" <?php echo $linha['ativo'] == 'true' ? 'checked=checked' : ''; ?>/>
-            Não <input type="radio" name="ativo" id="ativo" value="false" class="campo" <?php echo $linha['ativo'] == 'false' ? 'checked=checked' : ''; ?>/>
+            Sim <input type="radio" name="ativo" id="ativo" value="true" class="campo" <?php echo ($linha['ativo']) == true ? 'checked=checked' : ''; ?>/>
+            Não <input type="radio" name="ativo" id="ativo" value="false" class="campo" <?php echo ($linha['ativo']) == false ? 'checked=checked' : ''; ?>/>
           </td>
         </tr>
         <tr>

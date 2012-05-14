@@ -3,17 +3,14 @@ if (defined('ROOT_APP') == false) {
   define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
 }
 
-if (defined('ROOT_IMP') == false) {
-  define('ROOT_IMP', ROOT_APP . "/importar");
-}
 require_once(ROOT_APP . "/class/Autorizacao.class.php");
 require_once(ROOT_APP . "/util/funcoes.php");
 ?>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
-    <link rel="stylesheet" type="text/css" href="/sga/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/sga/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/sga/css/main.css"/>
     <style type="text/css">
       *{
         margin: 0; padding: 0; border: 0;
@@ -34,7 +31,6 @@ require_once(ROOT_APP . "/util/funcoes.php");
 
     $autorizacao = new Autorizacao();
     $aut = $autorizacao->exibe($numero);
-
     /*     * *********************************************************************************
      *  Bloco de Impressão da Autorização
      * ********************************************************************************* */

@@ -8,7 +8,30 @@ class Autorizacao extends Base {
     parent::__construct();
     $this->tabela = 'autorizacoes';
     if (sizeof($campos) <= 0) {
-      $this->campos_valores = array("id_operador" => null, "id_estabelecimento" => null, "id_tipo" => null, "id_faixa" => null, "id_competencia" => null, "id_procedimento" => null, "id_autorizador" => null, "id_solicitante" => null, "id_municipio" => null, "numero" => null, "digito" => null, "nome_paciente" => null, "data_nascimento" => null, "data_emissao" => null, "nome_da_mae" => null, "sexo" => null, "endereco" => null, "bairro" => null, "cep" => null, "uf" => null, "nome_responsavel" => null, "raca_cor" => null);
+      $this->campos_valores = array(
+          "id_operador" => null, 
+          "id_estabelecimento" => null, 
+          "id_tipo" => null, 
+          "id_faixa" => null, 
+          "id_competencia" => null, 
+          "id_procedimento" => null, 
+          "id_autorizador" => null, 
+          "id_solicitante" => null, 
+          "id_municipio" => null, 
+          "numero" => null, 
+          "digito" => null, 
+          "nome_paciente" => null, 
+          "data_nascimento" => null, 
+          "data_emissao" => null, 
+          "nome_da_mae" => null, 
+          "sexo" => null, 
+          "endereco" => null, 
+          "bairro" => null, 
+          "cep" => null, 
+          "uf" => null, 
+          "nome_responsavel" => null, 
+          "raca_cor" => null, 
+          "str_competencia" => null);
     } else {
       $this->campos_valores = $campos;
     }

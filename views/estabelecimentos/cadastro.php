@@ -42,25 +42,24 @@ function __autoload($classe) {
           <td><input type="text" name="fantasia" id="fantasia" size="60" maxlength="60" class="campo" required="true"/></td>
         </tr>
         <tr>
-          <td>Valor Teto</td>
-          <td><input type="text" name="valor_teto" size="15" class="campo" value="0.00"/></td>
-        </tr>
-        <tr>
-          <td>Valor Médio (aih)</td>
-          <td><input type="text" name="valor_medio" size="15" class="campo" value="0.00"/></td>
-        </tr>
-        <tr>
           <td>Emite AIH?</td>
           <td>
-            Sim <input type="radio" name="aih" id="aih" value="S" class="campo"/>
-            Não <input type="radio" name="aih" id="aih" value="N" class="campo" checked/>
+            Sim <input type="radio" name="aih" id="aih" value="true" class="campo"/>
+            Não <input type="radio" name="aih" id="aih" value="false" class="campo" checked/>
           </td>
         </tr>
         <tr>
           <td>Emite Apac?</td>
           <td>
-            Sim <input type="radio" name="apac" id="apac" value="S" class="campo"/>
-            Não <input type="radio" name="apac" id="apac" value="N" class="campo" checked/>
+            Sim <input type="radio" name="apac" id="apac" value="true" class="campo"/>
+            Não <input type="radio" name="apac" id="apac" value="false" class="campo" checked/>
+          </td>
+        </tr>
+        <tr>
+          <td>Bloqueia Teto?</td>
+          <td>
+            Sim <input type="radio" name="teto" id="apac" value="true" class="campo"/>
+            Não <input type="radio" name="teto" id="apac" value="false" class="campo" checked/>
           </td>
         </tr>
         <tr>

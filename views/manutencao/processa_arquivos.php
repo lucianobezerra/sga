@@ -69,7 +69,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_cid.txt', 'r'))) {
 
 /* * *************************************************************************************
   Bloco para importar Tabela de Detalhes
- * ************************************************************************************* */
+ * ************************************************************************************* *
 echo "Iniciando a importação de Detalhes (tb_detalhe.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/tb_detalhe.txt', 'r'))) {
   $lines = array();
@@ -90,8 +90,30 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_detalhe.txt', 'r'))) {
 }
 
 /* * *************************************************************************************
-  Bloco para importar Tabela de Relacionamento entre Procedimento e Cid10
+  Bloco para importar Tabela de Tipos de Registro de Atendimento
  * ************************************************************************************* */
+echo "Iniciando a importação de Registros (tb_registro.txt)<br/>";
+if (($arquivo = fopen(ROOT_IMP . '/tb_registro.txt', 'r'))) {
+  $lines = array();
+  while (( $linha = fgets($arquivo, 1024))) {
+    $lines[] = sprintf('("%s")', implode('","', array(
+                trim(substr($linha, 0, 2)),
+                utf8_encode(trim(substr($linha, 2, 50))),
+                trim(substr($linha, 52, 6)))));
+  }
+  fclose($arquivo);
+
+  $sql = sprintf('INSERT INTO registros (codigo, descricao, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = str_replace('"', "'", $sql);
+  $conexao = new Conexao('sga2');
+  $conexao->open();
+  pg_query($sql);
+  $conexao->close();
+}
+
+  /* * *************************************************************************************
+  Bloco para importar Tabela de Relacionamento entre Procedimento e Cid10
+ * ************************************************************************************* *
 echo "Iniciando a importação de Relacionamento entre Procedimento e Cid10 (rl_procedimento_cid.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_cid.txt', 'r'))) {
   $lines = array();
@@ -113,7 +135,7 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_cid.txt', 'r'))) {
 
 /* * *************************************************************************************
   Bloco para importar Tabela de Relacionamento entre Procedimento e Detalhes
- * ************************************************************************************* */
+ * ************************************************************************************* *
 echo "Iniciando a importação de Relacionamento entre Procedimento e Detalhes (rl_procedimento_detalhe.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_detalhe.txt', 'r'))) {
   $lines = array();
@@ -126,6 +148,27 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_detalhe.txt', 'r'))) {
   fclose($arquivo);
 
   $sql = sprintf('INSERT INTO procedimentos_detalhes (codigo_procedimento, codigo_detalhe, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = str_replace('"', "'", $sql);
+  $conexao = new Conexao('sga2');
+  $conexao->open();
+  pg_query($sql);
+  $conexao->close();
+}
+/* * *************************************************************************************
+  Bloco para importar Tabela de Relacionamento entre Procedimento e Registros
+ * ************************************************************************************* */
+echo "Iniciando a importação de Relacionamento entre Procedimento e Registros (rl_procedimento_registro.txt)<br/>";
+if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_registro.txt', 'r'))) {
+  $lines = array();
+  while (( $linha = fgets($arquivo, 1024))) {
+    $lines[] = sprintf('("%s")', implode('","', array(
+                trim(substr($linha, 0, 10)),
+                trim(substr($linha, 10, 2)),
+                trim(substr($linha, 12, 6)))));
+  }
+  fclose($arquivo);
+
+  $sql = sprintf('INSERT INTO procedimentos_registros (codigo_procedimento, codigo_registro, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();

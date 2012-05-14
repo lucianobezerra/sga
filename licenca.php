@@ -4,7 +4,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type='text/javascript' src='js/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery-1.7.2.min.js'></script>
   </head>
   <body>
     <script type="text/javascript">

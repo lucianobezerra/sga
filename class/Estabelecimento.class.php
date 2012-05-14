@@ -12,17 +12,15 @@ class Estabelecimento extends Base {
           "cnes" => null,
           "razao_social" => null,
           "nome_fantasia" => null,
-          "valor_teto" => null,
-          "valor_medio" => null,
           "emite_aih" => null,
           "emite_apac" => null,
+          "bloqueia_teto" => null,
           "ativo" => null);
     } else {
       $this->campos_valores = $campos;
     }
     $this->campopk = 'id';
   }
-
 }
 
 ?>

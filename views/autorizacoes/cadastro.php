@@ -1,10 +1,7 @@
+
 <?php
 if (defined('ROOT_APP') == false) {
   define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
-}
-
-if (defined('ROOT_IMP') == false) {
-  define('ROOT_IMP', ROOT_APP . "/importar");
 }
 
 require(ROOT_APP . "/class/Sessao.class.php");
@@ -52,12 +49,88 @@ if (!$ambiente) {
         form fieldset input.botao{float: right; cursor: pointer; border: none }
       </style>
       <script type="text/javascript">
+        function selecionaProcedimento(event){
+          var filtro = '?';
+          var valor = event ? event.keyCode : event.charCode;
+          if(valor == 113){
+            janela = window.open('views/autorizacoes/seleciona_procedimento.php?procedimento='+filtro, 'Janela', 'width=800,height=500,toolbar=no,status=no,menubar=no,top=100, left=110, scrollbars=yes');
+          }
+        }
+        function selecionaCid(event){
+          var opcoes = 'width=800,height=500,toolbar=no,status=no,menubar=no,top=100, left=110, scrollbars=yes';
+          var procedimento = document.autorizacao.id_procedimento.value;
+          var competencia  = <?= $id_cmpt ?>;
+          var valor = event ? event.keyCode : event.charCode;
+          if(valor == 113){
+            janela = window.open('views/autorizacoes/seleciona_diagnostico.php?procedimento='+procedimento+'&cmpt='+competencia, 'Janela', opcoes);
+          }
+        }
+        function selecionaCidade(event){
+          var opcoes = 'width=600,height=300,toolbar=no,status=no,menubar=no,top=100, left=110, scrollbars=yes';
+          var municipio = document.autorizacao.id_municipio.value;
+          var valor = event ? event.keyCode : event.charCode;
+          if(valor == 113){
+            janela = window.open('views/autorizacoes/seleciona_municipio.php?municipio='+municipio, 'Janela', opcoes);
+          }
+        }
+                            
         $(function($){
           $("input[name=cns]").mask("999999999999999");
           $("input[name=data_nascimento]").mask("99/99/9999");
           $("input[name=data_autoriza]").mask("99/99/9999");
           $("input[name=cep]").mask("99999-999");
-                                                  
+                                                                      
+          $('input[name=id_procedimento]').live('blur', function(){
+            var codigo = $(this).val();
+            var cmpt   = $('input[name=id_competencia]').val();
+            var url = 'views/autorizacoes/ajax_procedimento.php';
+            $.post(url,{codigo: codigo, cmpt: cmpt}, function(data){
+              if(data){
+                var valores = data.split(",");
+                var id   = valores[0];
+                var nome = valores[1];
+                $('input[name=nome_procedimento]').val(nome);
+                $('input[name=hidden_procedimento]').val(id);
+              } else {
+                $('input[name=nome_procedimento]').val('PROCEDIMENTO NAO LOCALIZADO');
+              }
+            });
+          });
+
+          $('input[name=id_diagnostico]').live('blur', function(){
+            var codigo = $(this).val();
+            var url = 'views/autorizacoes/ajax_diagnostico.php';
+            $.post(url,{codigo: codigo}, function(data){
+              if(data){
+                var valores = data.split(",");
+                var id   = valores[0];
+                var nome = valores[1];
+                $('input[name=nome_diagnostico]').val(nome);
+                $('input[name=hidden_diagnostico]').val(id);
+              } else {
+                $('input[name=nome_diagnostico]').val('DIAGNOSTICO NAO LOCALIZADO');
+              }
+            });
+          });
+
+          $('input[name=id_municipio]').live('blur', function(){
+            var codigo = $(this).val();
+            var url = 'views/autorizacoes/ajax_municipio.php';
+            $.post(url,{codigo: codigo}, function(data){
+              if(data){
+                var valores = data.split(",");
+                var id        = valores[0];
+                var estado    = valores[1];
+                var descricao = valores[2];
+                $('input[name=nome_municipio]').val(descricao);
+                $('input[name=hidden_municipio]').val(id);
+                $('input[name=hidden_estado]').val(estado);
+              } else {
+                $('input[name=nome_municipio]').val('MUNICIPIO NAO LOCALIZADO');
+              }
+            });
+          });
+                                            
           $('input[type=submit]').live('click', function(e){
             e.preventDefault();
             var valores = $('#autorizacao').serialize();
@@ -67,32 +140,23 @@ if (!$ambiente) {
               dataType: 'html',
               data: valores,
               success: function(resposta){
-                var numero = resposta.split('-');
-                var n1 = new Number(numero[0]);
-                if(n1 instanceof Number){
-                  var dialogOpts = { modal: true, 
-                    bgiframe: true, 
-                    autoOpen: false, 
-                    height: 200, 
-                    width: 300, 
-                    draggable: true, 
-                    resizable: false,
-                    title: 'AUTORIZAÇÃO GERADA',
-                    buttons: {
-                      "Retornar": function() {
-                        $(this).dialog("close");
-                      }
-                    }};
-                  $('#exibir').dialog(dialogOpts);
-                  $('#exibir').load('views/autorizacoes/retorno.php?numero='+n1);
-                  $('#exibir').dialog('open');
-                  $('form')[0].reset();
-                } else {
-                  $('#retorno').html(resposta);
-                }
+                var dialogOpts = { modal: true, bgiframe: true, autoOpen: false, height: 200, width: 300, draggable: true, resizable: false, title: 'AUTORIZAÇÃO GERADA', 
+                  buttons: {
+                    "Imprimir": function() {
+                      window.open('views/autorizacoes/exibir.php?numero='+resposta, 'Imprimir Autorização', 'width=770, height=400');
+                      $('form')[0].reset();
+                      $(this).dialog("close");
+                    },
+                    "Corrigir": function() {
+                      $(this).dialog("close");
+                    }
+                  }};
+                $('#exibir').dialog(dialogOpts);
+                $('#exibir').html(resposta);
+                $('#exibir').dialog('open');
               }
             });
-                                                
+            return false;
           });
         });
       </script>
@@ -104,6 +168,10 @@ if (!$ambiente) {
         <input type="hidden" name="id_tipo" value="<?= $id_tipo; ?>" />
         <input type="hidden" name="id_faixa" value="<?= $id_faixa; ?>" />
         <input type="hidden" name="id_competencia" value="<?= $id_cmpt; ?>" />
+        <input type="hidden" name="hidden_procedimento" value="" />
+        <input type="hidden" name="hidden_diagnostico" value="" />
+        <input type="hidden" name="hidden_municipio" value="" />
+        <input type="hidden" name="hidden_estado" value="" />
         <fieldset>
           <legend align="center" style="padding-bottom: 3px; padding-top: 3px;">Emissão de Autorização</legend>
           <label style="width: 120px;">Cartão Sus:    <input style="width: 115px;" type="text" maxlength="15" name="cns"/></label>
@@ -119,7 +187,9 @@ if (!$ambiente) {
           <label style="width: 300px;">Rua e Número:  <input style="width: 290px;" type="text" maxlength="60" name="endereco"/></label>
           <label style="width: 165px;" >Bairro:       <input style="width: 160px;" type="text" maxlength="25" name="bairro"/></label>
           <label style="width: 120px;">Cep:           <input style="width: 110px;" type="text" maxlength="8"  name="cep"/></label>
-          <label style="width: 350px;">Município:     <br/><input style="width: 60px; margin-right: 5px" type="text" maxlength="7" name="id_municipio"/><input style="width: 275px;" type="text" maxlength="60" name="nome_municipio"/></label>
+          <label style="width: 350px;">Município:     <br/>
+            <input style="width: 60px; margin-right: 5px" type="text" maxlength="7" name="id_municipio" onkeypress="selecionaCidade(event)"/>
+            <input style="width: 275px;" type="text" maxlength="60" name="nome_municipio" disabled/></label>
           <label style="width: 320px;">Responsável:   <input style="width: 315px;" type="text" maxlength="60" name="nome_responsavel"/></label>
           <label style="width: 140px;">Raca/Cor:
             <select style="width: 140px;" name="raca_cor">
@@ -132,12 +202,12 @@ if (!$ambiente) {
             </select>
           </label>
           <label style="width: 500px;">Procedimento:<br/>
-            <input style="width: 80px;" type="text" maxlength="10" name="id_procedimento"/>
-            <input style="width: 375px;" type="text" maxlength="120" name="nome_procedimento"/>
+            <input style="width: 80px;" type="text" maxlength="10" id='id_procedimento' name="id_procedimento" onkeypress="selecionaProcedimento(event)"/>
+            <input style="width: 375px;" type="text" maxlength="120" name="nome_procedimento" disabled/>
           </label>
           <label style="width: 500px;">Diagnóstico:<br/>
-            <input style="width: 40px;" type="text" maxlength="4" name="id_diagnostico"/>
-            <input style="width: 415px;" type="text" maxlength="120" name="nome_diagnostico"/>
+            <input style="width: 40px;" type="text" maxlength="4" name="id_diagnostico" onkeypress="selecionaCid(event)"/>
+            <input style="width: 415px;" type="text" maxlength="120" name="nome_diagnostico" disabled/>
           </label>
           <label>Solicitante:<select name="id_solicitante" style="width: 220px;">
               <option value=""> Selecione ...</option>

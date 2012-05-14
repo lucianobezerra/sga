@@ -131,7 +131,7 @@ abstract class Banco {
 
   public function executaSql($sql = null) {
     if ($sql != null) {
-      $query = pg_query($sql) or $this->trataErro(__FILE__, __FUNCTION__, __LINE__);
+      $query = pg_query($sql) or die(pg_last_error());
       $this->linhasafetadas = pg_affected_rows($query);
       if (substr(trim(strtolower($sql)), 0, 6) == 'select') {
         $this->dataset = $query;
@@ -140,8 +140,14 @@ abstract class Banco {
         return $this->linhasafetadas;
       }
     } else {
-      $this->trataErro(__FILE__, __FUNCTION__, 'Dados para Cadastro nao informados, verifique o formulario', FALSE);
+      echo "Dados para Cadastro nao informados, verifique o formulario";
     }
+  }
+
+  public function insert($sql = null) {
+    $query = pg_query($sql);
+    $this->linhasafetadas = pg_affected_rows($query);
+    return $this->linhasafetadas;
   }
 
   public function retornaDados($tipo = null) {

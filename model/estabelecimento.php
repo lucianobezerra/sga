@@ -17,10 +17,9 @@ function inserir() {
   $ups->setValor('cnes',          $_POST['cnes']);
   $ups->setValor('razao_social',  strtoupper($_POST['razao']));
   $ups->setValor('nome_fantasia', strtoupper($_POST['fantasia']));
-  $ups->setValor('valor_teto',    $_POST['valor_teto']);
-  $ups->setValor('valor_medio',   $_POST['valor_medio']);
   $ups->setValor('emite_aih',     $_POST['aih']);
   $ups->setValor('emite_apac',    $_POST['apac']);
+  $ups->setValor('bloqueia_teto', $_POST['teto']);
   $ups->setValor('ativo',         $_POST['ativo']);
 
   $ups->inserir($ups);
@@ -30,10 +29,9 @@ function alterar($id) {
   $ups = new Estabelecimento();
   $ups->setValor('razao_social',  strtoupper($_POST['razao']));
   $ups->setValor('nome_fantasia', strtoupper($_POST['fantasia']));
-  $ups->setValor('valor_teto',    $_POST['valor_teto']);
-  $ups->setValor('valor_medio',   $_POST['valor_medio']);
   $ups->setValor('emite_aih',     $_POST['aih']);
   $ups->setValor('emite_apac',    $_POST['apac']);
+  $ups->setValor('bloqueia_teto', $_POST['teto']);
   $ups->setValor('ativo',         $_POST['ativo']);
   $ups->valorpk = $id;
   $ups->delCampo("cnes");

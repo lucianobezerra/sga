@@ -47,5 +47,5 @@ endif;
   a) Navegador Mozilla Firefox 4.0 ou superior;<br/>
   b) Resolução <span class="requisito">Mínima</span> de 1024x768px<br/>
   c) Velocidade <span class="requisito">Mínima</span> de Conexão a Internet de 1mb;<br/><br/><br/>
-  <a style='display: inline' href='http://br.mozdev.org/' target='_blank'><img src='http://sfx-images.mozilla.org/firefox/3.6/110x32_get_blue.png' style='border-style:none;' alt="" /></a><br/><br/>
+ <a href="http://affiliates.mozilla.org/link/banner/16211"><img src="http://affiliates-cdn.mozilla.org/media/uploads/banners/eb1019e6bf5257376b2293d2e1fc86280c1ffc59.png" alt="Atualização" /></a>
 </div>

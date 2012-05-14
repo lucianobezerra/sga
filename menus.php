@@ -30,6 +30,13 @@ require_once(dirname(__FILE__) . '/util/funcoes.php');
       <li><a href="views/autorizacoes/resumo.php">Resumo</a></li>
     </ul>
   </dd>
+  <dt><a href="#">Relatórios</a></dt>
+  <dd>
+    <ul>
+      <li><a href="views/relatorios/estabelecimentos.php">Estabelecimentos</a></li>
+      <li><a href="views/relatorios/operadores.php">Operadores</a></li>
+    </ul>
+  </dd>
   <dt><a href="#">Manutenção</a></dt>
   <dd>
     <ul>

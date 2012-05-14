@@ -1,7 +1,6 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
-require_once(dirname(dirname(__FILE__)) . DS . 'util' . DS . 'funcoes.php');
+require_once(dirname(dirname(__FILE__)) .'/util/funcoes.php');
 
 require_once("Conexao.class.php");
 
@@ -16,7 +15,7 @@ class Valida {
     }
 
     function validaSistema() {
-    $conexao = new Conexao('sga');
+    $conexao = new Conexao('sga2');
     $conexao->open();
 
     $data_hoje = date('Y-m-d');

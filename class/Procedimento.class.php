@@ -15,6 +15,21 @@ class Procedimento extends Base {
     $this->campopk = 'id';
   }
 
+  public function selecionaProcedimento($objeto) {
+    $sql = "select id, descricao from {$objeto->tabela} ";
+    if ($objeto->extras_select != null) {
+      $sql .= " " . $objeto->extras_select . " ";
+    }
+    return $this->executaSql($sql);
+  }
+
+  public function retornaValor($objeto) {
+    $sql = "select (valor_sp + valor_sa + valor_sh) as valor from {$objeto->tabela} ";
+    if ($objeto->extras_select != null) {
+      $sql .= " " . $objeto->extras_select . " ";
+    }
+    return $this->executaSql($sql);
+  }
 }
 
 ?>

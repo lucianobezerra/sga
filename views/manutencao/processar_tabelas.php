@@ -62,7 +62,10 @@ $dir = ROOT_IMP;
 $dh = opendir($dir);
 
 while (false !== ($filename = readdir($dh))) {
-  if ($filename != 'rl_procedimento_detalhe.txt' && $filename != 'rl_procedimento_cid.txt' && $filename != 'rl_procedimento_cid.txt' && $filename != 'tb_detalhe.txt' && $filename != 'tb_procedimento.txt' && $filename != 'tb_cid.txt' && $filename != '.' && $filename != '..') {
+  if ($filename != 'rl_procedimento_detalhe.txt' && $filename != 'rl_procedimento_cid.txt' && 
+      $filename != 'rl_procedimento_cid.txt' && $filename != 'tb_detalhe.txt' && $filename != 'tb_procedimento.txt' && 
+      $filename != 'tb_cid.txt' && $filename != 'tb_registro.txt' && $filename != 'rl_procedimento_registro.txt' && 
+      $filename != '.' && $filename != '..') {
     unlink(ROOT_IMP . '/' . $filename);
   }
 }
