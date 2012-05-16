@@ -11,14 +11,11 @@ if (defined('ROOT_IMP') == false) {
 require_once(ROOT_APP . '/util/funcoes.php');
 require_once(ROOT_APP . '/class/Conexao.class.php');
 require_once(ROOT_APP . '/class/Competencia.class.php');
+require_once(ROOT_APP . '/class/Sessao.class.php');
 
-function pegaCompetencia($valor){
-  $cmpt = new Competencia();
-  $cmpt->extras_select = "where ano||mes as cmpt='{$valor}'";
-  $cmpt->seleciona($cmpt);
-  $competencia = $cmpt->retornaDados("array");
-  return $competencia['id'];
-}
+$session = new Session();
+$session->start();
+$competencia = $session->getNode("id_competencia");
 
 
 /* * *************************************************************************************
@@ -42,7 +39,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_procedimento.txt', 'r'))) {
                 trim(substr($linha, 292, 10)) / 100,
                 trim(substr($linha, 302, 10)) / 100,
                 trim(substr($linha, 320, 6)),
-                pegaCompetencia(substr($linha, 320, 6)))));
+                $competencia)));
   }
   fclose($arquivo);
 
@@ -78,7 +75,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_cid.txt', 'r'))) {
 
 /* * *************************************************************************************
   Bloco para importar Tabela de Detalhes
- * ************************************************************************************* *
+ * ************************************************************************************* */
 echo "Iniciando a importação de Detalhes (tb_detalhe.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/tb_detalhe.txt', 'r'))) {
   $lines = array();
@@ -86,11 +83,12 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_detalhe.txt', 'r'))) {
     $lines[] = sprintf('("%s")', implode('","', array(
                 trim(substr($linha, 0, 3)),
                 utf8_encode(trim(substr($linha, 3, 100))),
-                trim(substr($linha, 103, 6)))));
+                trim(substr($linha, 103, 6)),
+                $competencia)));
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO detalhes (codigo, descricao, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO detalhes (codigo, descricao, cmpt, competencia_id) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();
@@ -108,11 +106,12 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_registro.txt', 'r'))) {
     $lines[] = sprintf('("%s")', implode('","', array(
                 trim(substr($linha, 0, 2)),
                 utf8_encode(trim(substr($linha, 2, 50))),
-                trim(substr($linha, 52, 6)))));
+                trim(substr($linha, 52, 6)),
+                $competencia)));
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO registros (codigo, descricao, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO registros (codigo, descricao, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();
@@ -122,7 +121,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_registro.txt', 'r'))) {
 
   /* * *************************************************************************************
   Bloco para importar Tabela de Relacionamento entre Procedimento e Cid10
- * ************************************************************************************* *
+ * ************************************************************************************* */
 echo "Iniciando a importação de Relacionamento entre Procedimento e Cid10 (rl_procedimento_cid.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_cid.txt', 'r'))) {
   $lines = array();
@@ -130,11 +129,12 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_cid.txt', 'r'))) {
     $lines[] = sprintf('("%s")', implode('","', array(
                 trim(substr($linha, 0, 10)),
                 trim(substr($linha, 10, 4)),
-                trim(substr($linha, 15, 6)))));
+                trim(substr($linha, 15, 6)),
+                $competencia)));
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO procedimentos_cids (codigo_procedimento, codigo_cid, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO procedimentos_cids (codigo_procedimento, codigo_cid, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();
@@ -144,7 +144,7 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_cid.txt', 'r'))) {
 
 /* * *************************************************************************************
   Bloco para importar Tabela de Relacionamento entre Procedimento e Detalhes
- * ************************************************************************************* *
+ * ************************************************************************************* */
 echo "Iniciando a importação de Relacionamento entre Procedimento e Detalhes (rl_procedimento_detalhe.txt)<br/>";
 if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_detalhe.txt', 'r'))) {
   $lines = array();
@@ -152,11 +152,12 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_detalhe.txt', 'r'))) {
     $lines[] = sprintf('("%s")', implode('","', array(
                 trim(substr($linha, 0, 10)),
                 trim(substr($linha, 10, 3)),
-                trim(substr($linha, 13, 6)))));
+                trim(substr($linha, 13, 6)),
+        $competencia)));
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO procedimentos_detalhes (codigo_procedimento, codigo_detalhe, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO procedimentos_detalhes (codigo_procedimento, codigo_detalhe, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();
@@ -173,11 +174,12 @@ if (($arquivo = fopen(ROOT_IMP . '/rl_procedimento_registro.txt', 'r'))) {
     $lines[] = sprintf('("%s")', implode('","', array(
                 trim(substr($linha, 0, 10)),
                 trim(substr($linha, 10, 2)),
-                trim(substr($linha, 12, 6)))));
+                trim(substr($linha, 12, 6)),
+        $competencia)));
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO procedimentos_registros (codigo_procedimento, codigo_registro, cmpt) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO procedimentos_registros (codigo_procedimento, codigo_registro, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();

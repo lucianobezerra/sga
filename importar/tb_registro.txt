@@ -1,8 +1,8 @@
-01BPA (Consolidado)                                 201205
-02BPA (Individualizado)                             201205
-03AIH (Proc. Principal)                             201205
-04AIH (Proc. Especial)                              201205
-05AIH (Proc. Secundário)                            201205
-06APAC (Proc. Principal)                            201205
-07APAC (Proc. Secundário)                           201205
-08RAAS (Atenção Domiciliar)                         201205
+01BPA (Consolidado)                                 201204
+02BPA (Individualizado)                             201204
+03AIH (Proc. Principal)                             201204
+04AIH (Proc. Especial)                              201204
+05AIH (Proc. Secundário)                            201204
+06APAC (Proc. Principal)                            201204
+07APAC (Proc. Secundário)                           201204
+08RAS (Atenção Domiciliar)                          201204

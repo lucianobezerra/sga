@@ -1,30 +1,30 @@
-001Inclui valor da anestesia                                                                           201205
-003Admite longa permanência                                                                            201205
-004Admite permanência à maior                                                                          201205
-005Admite liberação de quantidade na AIH                                                               201205
-006CNRAC                                                                                               201205
-007Permanência por dia                                                                                 201205
-008Não permite mudança de procedimento                                                                 201205
-009Exige CNS                                                                                           201205
-010Exige VDRL na AIH                                                                                   201205
-011Permite alta direta de UTI                                                                          201205
-012Exige idade no BPA (Consolidado)                                                                    201205
-013Verifica habilitação de terceiro                                                                    201205
-014Admite APAC de Continuidade                                                                         201205
-015Admitido apenas em Hosp.Espec/Psiquiatria                                                           201205
-017Exige Informação da OPM                                                                             201205
-019Projeto Olhar Brasil                                                                                201205
-020Monitoramento do CEO                                                                                201205
-021Não Exige CBO                                                                                       201205
-022Exige registro na APAC de dados complementares                                                      201205
-023Registro no SISCOLO                                                                                 201205
-024Registro no SISPRENATAL                                                                             201205
-025Registro no SISMAMA                                                                                 201205
-026Registro de Procedimentos Secundário Compativel                                                     201205
-027Identificação de  Cirg. Cardiovasculares Pediátricas                                                201205
-029Admite período maior para a apresentação                                                            201205
-030Cirurgias Eletivas - Componente I                                                                   201205
-031Cirurgias Eletivas - Componente II                                                                  201205
-032Cirurgias Eletivas - Componente III                                                                 201205
-033APAC com validade fixa de 03 competências                                                           201205
-034Não exige CNS                                                                                       201205
+001Inclui valor da anestesia                                                                           201204
+003Admite longa permanência                                                                            201204
+004Admite permanência à maior                                                                          201204
+005Admite liberação de quantidade na AIH                                                               201204
+006CNRAC                                                                                               201204
+007Permanência por dia                                                                                 201204
+008Não permite mudança de procedimento                                                                 201204
+009Exige CNS                                                                                           201204
+010Exige VDRL na AIH                                                                                   201204
+011Permite alta direta de UTI                                                                          201204
+012Exige idade no BPA (Consolidado)                                                                    201204
+013Verifica habilitação de terceiro                                                                    201204
+014Admite APAC de Continuidade                                                                         201204
+015Admitido apenas em Hosp.Espec/Psiquiatria                                                           201204
+017Exige Informação da OPM                                                                             201204
+019Projeto Olhar Brasil                                                                                201204
+020Monitoramento do CEO                                                                                201204
+021Não Exige CBO                                                                                       201204
+022Exige registro na APAC de dados complementares                                                      201204
+023Registro no SISCOLO                                                                                 201204
+024Registro no SISPRENATAL                                                                             201204
+025Registro no SISMAMA                                                                                 201204
+026Registro de Procedimentos Secundário Compativel                                                     201204
+027Identificação de  Cirg. Cardiovasculares Pediátricas                                                201204
+029Admite período maior para a apresentação                                                            201204
+030Cirurgias Eletivas - Componente I                                                                   201204
+031Cirurgias Eletivas - Componente II                                                                  201204
+032Cirurgias Eletivas - Componente III                                                                 201204
+033APAC com validade fixa de 03 competências                                                           201204
+034Não exige CNS                                                                                       201204

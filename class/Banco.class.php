@@ -107,6 +107,7 @@ abstract class Banco {
     if ($objeto->extras_select != null) {
       $sql .= " " . $objeto->extras_select . " ";
     }
+    echo $sql;
     return $this->executaSql($sql);
   }
 
