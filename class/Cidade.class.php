@@ -16,7 +16,7 @@ class Cidade extends Base {
   }
 
   public function selecionaCidade($objeto) {
-    $sql = "select cidades.id, cidades.codigo, cidades.descricao, estados.id, estados.sigla ";
+    $sql = "select cidades.id, cidades.descricao, estados.sigla ";
     $sql .= "from {$objeto->tabela} ";
     $sql .= "inner join estados on cidades.estado_id=estados.id ";
     if ($objeto->extras_select != null) {

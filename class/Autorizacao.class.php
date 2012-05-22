@@ -31,7 +31,8 @@ class Autorizacao extends Base {
           "uf" => null, 
           "nome_responsavel" => null, 
           "raca_cor" => null, 
-          "str_competencia" => null);
+          "str_competencia" => null,
+          "carater_atendimento" => null);
     } else {
       $this->campos_valores = $campos;
     }

@@ -4,14 +4,9 @@ require_once('../../class/Competencia.class.php');
 require_once('../../class/Sessao.class.php');
 
 $procedimento = $_GET['procedimento'];
-
-$cp = new Competencia();
-$cp->valorpk = $_GET['cmpt'];
-$cp->strCompetencia($cp);
-$strCmpt = '';
-while ($s = $cp->retornaDados("array")) {
-  $strCmpt = $s[0];
-}
+$session = new Session();
+$session->start();
+$cmpt = $session->getNode("id_competencia");
 ?>
 <html>
   <head>
@@ -32,8 +27,7 @@ while ($s = $cp->retornaDados("array")) {
     $sql = "select procedimentos_cids.id, cids.codigo, cids.descricao ";
     $sql .= "from procedimentos_cids ";
     $sql .= "inner join cids on procedimentos_cids.codigo_cid = cids.codigo ";
-    $sql .= "where procedimentos_cids.codigo_procedimento='{$procedimento}' and procedimentos_cids.cmpt='{$strCmpt}' order by cids.descricao";
-
+    $sql .= "where procedimentos_cids.codigo_procedimento='{$procedimento}' and procedimentos_cids.id_competencia={$cmpt} order by cids.descricao";
     $conexao = new Conexao('sga2');
     $conexao->open();
     $res = pg_query($sql);

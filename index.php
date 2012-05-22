@@ -7,6 +7,7 @@ define('ROOT_IMP', ROOT_APP . "/importar");
 $session = new Session();
 $session->start();
 $logado = $session->getNode("id_operador");
+$cp = $session->getNode("id_competencia");
 if (!$logado) {
   @header('Location: login.html');
 }

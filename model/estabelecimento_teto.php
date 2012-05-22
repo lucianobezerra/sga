@@ -6,6 +6,8 @@ if (defined('ROOT_APP') == false) {
 
 require_once(ROOT_APP.'/class/EstabelecimentoTeto.class.php');
 require_once(ROOT_APP.'/class/Estabelecimento.class.php');
+require_once(ROOT_APP.'/class/Competencia.class.php');
+require_once(ROOT_APP.'/class/Procedimento.class.php');
 
 $acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
 $id   = isset($_REQUEST['id'])   ? $_REQUEST['id']   : null;
@@ -14,10 +16,6 @@ switch ($acao){
   case 'inserir': inserir();    break;
   case 'alterar': alterar($id); break;
   case 'excluir': excluir($id); break;
-}
-
-function atualizaSaldo($estabelecimento, $competencia){
-  $sql = "update estabelecimentos set valor_saldo";
 }
 
 function inserir(){

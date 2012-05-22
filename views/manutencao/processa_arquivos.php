@@ -43,7 +43,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_procedimento.txt', 'r'))) {
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO procedimentos (codigo, descricao, sexo, idade_minima, idade_maxima, valor_sh, valor_sa, valor_sp, cmpt, competencia_id) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO procedimentos (codigo, descricao, sexo, idade_minima, idade_maxima, valor_sh, valor_sa, valor_sp, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();
@@ -88,7 +88,7 @@ if (($arquivo = fopen(ROOT_IMP . '/tb_detalhe.txt', 'r'))) {
   }
   fclose($arquivo);
 
-  $sql = sprintf('INSERT INTO detalhes (codigo, descricao, cmpt, competencia_id) VALUES %s', implode(',', array_slice($lines, 0)));
+  $sql = sprintf('INSERT INTO detalhes (codigo, descricao, cmpt, id_competencia) VALUES %s', implode(',', array_slice($lines, 0)));
   $sql = str_replace('"', "'", $sql);
   $conexao = new Conexao('sga2');
   $conexao->open();

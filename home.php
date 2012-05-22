@@ -9,6 +9,7 @@ $listagem = $faixas->lista();
 $session = new Session();
 $session->start();
 $nome_operador = $session->getNode("nome_operador");
+$cp = $session->getNode("id_competencia");
 if(!$session->check()):
   $link_ambiente = "<a class='ambiente' href='ambiente.php'>CONFIGURAR AMBIENTE PARA {$nome_operador}</a>";
 else:
@@ -47,5 +48,8 @@ endif;
   a) Navegador Mozilla Firefox 4.0 ou superior;<br/>
   b) Resolução <span class="requisito">Mínima</span> de 1024x768px<br/>
   c) Velocidade <span class="requisito">Mínima</span> de Conexão a Internet de 1mb;<br/><br/><br/>
- <a href="http://affiliates.mozilla.org/link/banner/16211"><img src="http://affiliates-cdn.mozilla.org/media/uploads/banners/eb1019e6bf5257376b2293d2e1fc86280c1ffc59.png" alt="Atualização" /></a>
+</div>
+<div style="height: 100px; margin-top: 60px; border: none;">
+  <a href="http://affiliates.mozilla.org/link/banner/16211"><img src="imagens/firefox.png" alt="Atualização" /></a>
+  <div id="cmpt" style="text-align: right">Competência: <?=$cp; ?></div>
 </div>

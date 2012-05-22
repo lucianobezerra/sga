@@ -18,7 +18,7 @@ $linha = $ups->retornaDados("array");
         $('form#unidade').submit(function(){
           $(this).ajaxSubmit(function(retorno){
             if(!retorno){
-              alert('Estabelecimento Atualizado.');
+              alert('Estabelecimento Atualizado.\nExecute a rotina de Atualizar Saldo, se necessário.');
               $('#right').load("views/estabelecimentos/");
             } else{
               $('div#mensagem-erro').html(retorno);

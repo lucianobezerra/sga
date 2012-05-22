@@ -33,7 +33,7 @@ while($linha_competencia = $competencia->retornaDados()){
           $(this).ajaxSubmit(function(retorno){
             if(!retorno){
               alert('Teto Financeiro Gravado.');
-              $('div#right').load("views/tetos_por_estabelecimento/index.php?id_estabelecimento=<?= $cmpt; ?>&id_competencia=<?=$ups ?>");
+              $('div#right').load("views/tetos_por_estabelecimento/index.php?id_estabelecimento=<?= $ups; ?>&id_competencia=<?=$cmpt ?>");
             } else{
               $('div#mensagem-erro').html(retorno);
             }

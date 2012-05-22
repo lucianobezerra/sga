@@ -3,9 +3,9 @@ require_once('../../class/Permissao.class.php');
 require_once('../../class/EstabelecimentoTipo.class.php');
 require_once('../../class/Operador.class.php');
 
-$opcao = isset($_REQUEST['opcao'])            ? $_REQUEST['opcao']            : null;
-$id_operador = $_REQUEST['_operador'];
-$id_unidade  = $_REQUEST['_estabelecimento'];
+$opcao       = isset($_REQUEST['opcao'])            ? $_REQUEST['opcao']            : null;
+$id_operador = isset($_REQUEST['_operador'])        ? $_REQUEST['_operador']        : null;
+$id_unidade  = isset($_REQUEST['_estabelecimento']) ? $_REQUEST['_estabelecimento'] : null;
 
 switch ($opcao) {
   case 1: geraEstabelecimentos($id_operador); break;

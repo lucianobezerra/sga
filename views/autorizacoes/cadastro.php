@@ -45,7 +45,7 @@ if (!$ambiente) {
         form fieldset legend{font-weight: bold; font: 14px Verdana, arial, tahoma; margin: 0; }
         form fieldset label{ font: 12px; display: block; border: none; width: 240px; float: left; }
         form fieldset label input{ width: 220px; border: 1px solid; padding:0px; text-transform: uppercase; }
-        form fieldset select{  border: 1px solid; padding: 1px; }
+        form fieldset select{  border: 1px solid; height: 20px }
         form fieldset input.botao{float: right; cursor: pointer; border: none }
       </style>
       <script type="text/javascript">
@@ -180,6 +180,7 @@ if (!$ambiente) {
           <label style="width: 120px;" >Nascimento:   <input style="width: 110px;" type="text" maxlength="10" name="data_nascimento"/></label>
           <label style="width: 110px;">Sexo:
             <select name="sexo"  style="width: 110px;">
+              <option value="0">Selecione</option>
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
             </select>
@@ -193,6 +194,7 @@ if (!$ambiente) {
           <label style="width: 320px;">Responsável:   <input style="width: 315px;" type="text" maxlength="60" name="nome_responsavel"/></label>
           <label style="width: 140px;">Raca/Cor:
             <select style="width: 140px;" name="raca_cor">
+              <option value="00">Selecione</option>
               <option value="01">01-BRANCA</option>
               <option value="02">02-PRETA</option>
               <option value="03">03-PARDA</option>
@@ -227,9 +229,19 @@ if (!$ambiente) {
               ?>
             </select>
           </label>
-          <label style="width: 460px; ">Data Autorização:<br/> <input style="width: 110px;" type="text" maxlength="10" name="data_autoriza"/>
-            <input name="salvar"  type="submit" class="botao" style="width: 100px; height: 22px;" value="Autorizar"/>
+          <label>Carater Atendimento
+            <select name="carater_atendimento"  style="width: 220px; height: 20px">
+              <option value="00">Selecione</option>
+              <option value="01">Eletivo</option>
+              <option value="02">Urgência</option>
+              <option value="03">Acidente no local de trabalho</option>
+              <option value="04">Acidente no trajeto para o trabalho</option>
+              <option value="05">Outros tipos de Acidente de Trânsito</option>
+              <option value="06">Outros tipos de Lesões e Envenenamentos</option>
+            </select>
           </label>
+          <label style="width: 110px; ">Autorização:<br/> <input style="width: 110px;" type="text" maxlength="10" name="data_autoriza"/></label>
+          <label style="width: 110px; "><input name="salvar"  type="submit" class="botao" style="width: 100px; margin-top: 15px;" value="Autorizar"/></label>
         </fieldset>
       </form>
       <br/>

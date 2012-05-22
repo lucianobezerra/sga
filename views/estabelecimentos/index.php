@@ -10,6 +10,10 @@ require_once(ROOT_APP . '/util/funcoes.php');
 $sessao = new Session();
 $sessao->start();
 $cmpt = $sessao->getNode("id_competencia");
+if(!isset($cmpt)){
+ echo "<p style='font-size: 12pt; margin-top: 12px; color: red'><a class='ambiente' href='ambiente.php'>Ambiente não configurado, clique para configurar</a></p>";
+ exit();
+}
 
 $nivel = retornaNivel();
 

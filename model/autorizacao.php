@@ -5,26 +5,32 @@ if (defined('ROOT_APP') == false) {
 }
 
 require(ROOT_APP . '/util/funcoes.php');
-require(ROOT_APP . '/class/Procedimento.class.php');
-require(ROOT_APP . '/class/Cidade.class.php');
 require(ROOT_APP . '/class/Estado.class.php');
+require(ROOT_APP . '/class/Cidade.class.php');
+require(ROOT_APP . '/class/Procedimento.class.php');
 require(ROOT_APP . '/class/ProcedimentoDetalhe.class.php');
 require(ROOT_APP . '/class/ProcedimentoCid.class.php');
 require(ROOT_APP . '/class/Competencia.class.php');
+require(ROOT_APP . '/class/Estabelecimento.class.php');
+require(ROOT_APP . '/class/EstabelecimentoTeto.class.php');
 require(ROOT_APP . '/class/Permissao.class.php');
 require(ROOT_APP . '/class/Autorizacao.class.php');
-require(ROOT_APP . '/class/Estabelecimento.class.php');
 
-$acao  = isset($_REQUEST['acao'])     ? $_REQUEST['acao']     : null;
-$id    = isset($_REQUEST['id'])       ? $_REQUEST['id']       : null;
+$acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 $valor = isset($_POST['searchField']) ? $_POST['searchField'] : null;
 
 switch ($acao) {
-  case "inserir": inserir();         break;
-  case "alterar": alterar($id);      break;
-  case "listagem": listagem();       break;
-  case "localiza": localiza($valor); break;
-  case "exibir": exibir($id);        break;
+  case "inserir": inserir();
+    break;
+  case "alterar": alterar($id);
+    break;
+  case "listagem": listagem();
+    break;
+  case "localiza": localiza($valor);
+    break;
+  case "exibir": exibir($id);
+    break;
 }
 
 function exibir($id) {
@@ -72,21 +78,9 @@ function exibir($id) {
   <?
 }
 
-function formataCompetencia($cmpt) {
-  $cp = new Competencia();
-  $cp->valorpk = $cmpt;
-  $cp->strCompetencia($cp);
-  $strCmpt = '';
-  while ($s = $cp->retornaDados("array")) {
-    $strCmpt = $s[0];
-  }
-  return $strCmpt;
-}
-
 function exigeCartaoSUS($procedimento, $cmpt) {
-  $strCmpt = formataCompetencia($cmpt);
   $pd = new ProcedimentoDetalhe();
-  $pd->extras_select = "where codigo_procedimento = '{$procedimento}' and codigo_detalhe='009' and cmpt = '{$strCmpt}'";
+  $pd->extras_select = "where codigo_procedimento = '{$procedimento}' and codigo_detalhe='009' and id_competencia = {$cmpt}";
   $pd->exigeCNS($pd);
   $retorno = '';
   while ($s = $pd->retornaDados("array")) {
@@ -96,11 +90,10 @@ function exigeCartaoSUS($procedimento, $cmpt) {
 }
 
 function compativel($procedimento, $cid, $cmpt) {
-  $strCmpt = formataCompetencia($cmpt);
   $retorno = '';
 
   $pc = new ProcedimentoCid();
-  $pc->extras_select = "where codigo_procedimento='{$procedimento}' and codigo_cid='{$cid}' and cmpt='{$strCmpt}'";
+  $pc->extras_select = "where codigo_procedimento='{$procedimento}' and codigo_cid='{$cid}' and id_competencia={$cmpt}";
   $pc->compativel($pc);
   while ($s = $pc->retornaDados("array")) {
     $retorno = $s[0];
@@ -108,44 +101,105 @@ function compativel($procedimento, $cid, $cmpt) {
   return ($retorno > 0 ) ? true : false;
 }
 
-function atualizaSaldo($id, $valor) {
-  $ups = new Estabelecimento();
-  $ups->setValor("valor_saldo", $valor);
-  $ups->valorpk = $id;
-  $ups->delCampo("cnes");
-  $ups->delCampo("razao_social");
-  $ups->delCampo("nome_fantasia");
-  $ups->delCampo("valor_teto");
-  $ups->delCampo("valor_medio");
-  $ups->delCampo("emite_aih");
-  $ups->delCampo("emite_apac");
-  $ups->delCampo("bloqueia_teto");
-  $ups->delCampo("ativo");
-  $ups->atualizar($ups);
+function atualizaSaldo($competencia, $estabelecimento, $valor) {
+  $valor_saldo = null;
+  $valor_id = null;
+  $teto = new EstabelecimentoTeto();
+  $teto->extras_select = "where id_competencia={$competencia} and id_estabelecimento={$estabelecimento}";
+  $teto->retornaSaldo($teto);
+  while ($linha = $teto->retornaDados()) {
+    $valor_saldo = $linha->valor_saldo;
+  }
+
+  $teto = new EstabelecimentoTeto();
+  $teto->extras_select = "where id_competencia={$competencia} and id_estabelecimento={$estabelecimento}";
+  $teto->retornaId($teto);
+  while ($linha = $teto->retornaDados()) {
+    $valor_id = $linha->id;
+  }
+
+  $teto = new EstabelecimentoTeto();
+  $teto->setValor("valor_saldo", ($valor_saldo - $valor));
+  $teto->valorpk = $valor_id;
+  $teto->atualizar($teto);
+}
+
+function checaSaldo($id_estabelecimento, $id_competencia, $valor) {
+  $valor_saldo = null;
+  $teto = new EstabelecimentoTeto();
+  $teto->extras_select = "where id_estabelecimento={$id_estabelecimento} and id_competencia={$id_competencia}";
+  $teto->retornaSaldo($teto);
+  while ($linha = $teto->retornaDados()) {
+    $valor_saldo = $linha->valor_saldo;
+  }
+  return ($valor_saldo >= $valor) ? true : false;
 }
 
 function pegaValor($id_procedimento, $id_competencia) {
-  $strCmpt = formataCompetencia($id_competencia);
   $valor = null;
   $procedimento = new Procedimento();
-  $procedimento->extras_select = "where id={$id_procedimento} and cmpt='{$strCmpt}'";
+  $procedimento->extras_select = "where codigo='{$id_procedimento}' and id_competencia={$id_competencia}";
   $procedimento->retornaValor($procedimento);
-  while($linha = $procedimento->retornaDados()){
+  while ($linha = $procedimento->retornaDados()) {
     $valor = $linha->valor;
   }
   return $valor;
 }
 
+function checaSexo($id_procedimento, $sexo, $id_competencia) {
+  $valor = null;
+  $procedimento = new Procedimento();
+  $procedimento->extras_select = "where codigo='{$id_procedimento}' and sexo in ('{$sexo}','I') and id_competencia={$id_competencia}";
+  $procedimento->sexoCompativel($procedimento);
+  while ($linha = $procedimento->retornaDados()) {
+    $valor = ($linha->qtde > 0) ? true : false;
+  }
+  return $valor;
+}
+
+function checaIdade($id_procedimento, $idade, $id_competencia) {
+  $valor = null;
+  $procedimento = new Procedimento();
+  $procedimento->extras_select = "where codigo='{$id_procedimento}' and {$idade} between (idade_minima/12) and (idade_maxima/12) and id_competencia={$id_competencia}";
+  $procedimento->idadeCompativel($procedimento);
+  while ($linha = $procedimento->retornaDados()) {
+    $valor = ($linha->qtde > 0) ? true : false;
+  }
+  return $valor;
+}
+
+function calcula_idade($data_nascimento, $data_calcula) {
+  $data_nascimento = strtotime($data_nascimento . " 00:00:00");
+  $data_calcula = strtotime($data_calcula . " 00:00:00");
+  $idade = floor(abs($data_calcula - $data_nascimento) / 60 / 60 / 24 / 365);
+  return($idade);
+}
+
 function inserir() {
-  if (exigeCartaoSus($_POST['id_procedimento'], $_POST['id_competencia']) == true) {
+  if (exigeCartaoSus($_POST['hidden_procedimento'], $_POST['id_competencia']) == true) {
     if ((validaCNS($_POST['cns']) == false) || (validaCNS_PROVISORIO($_POST['cns']) == false)) {
       echo "Cartão SUS inválido ou não informado!";
       exit;
     }
   }
 
+  if (checaSexo($_POST['id_procedimento'], $_POST['sexo'], $_POST['id_competencia']) == false) {
+    echo "Erro - Procedimento incompatível com Sexo!";
+    exit;
+  }
+
   if (compativel($_POST['id_procedimento'], $_POST['id_diagnostico'], $_POST['id_competencia']) == false) {
     echo "Erro - Diagnóstico Incompatível com o Procedimento!";
+    exit;
+  }
+
+  if (!checaSaldo($_POST['id_estabelecimento'], $_POST['id_competencia'], pegaValor($_POST['id_procedimento'], $_POST['id_competencia']))) {
+    echo "Erro - Saldo Insuficiente!";
+    exit;
+  }
+
+  if (checaIdade($_POST['id_procedimento'], calcula_idade(ConverteDataParaEUA($_POST['data_nascimento']),date("Y-m-d")), $_POST['id_competencia']) == false) {
+    echo "Erro - Procedimento Incompatível com a Idade do Paciente!";
     exit;
   }
 
@@ -155,35 +209,32 @@ function inserir() {
   $numero = $autorizacao->proxima($_POST['id_faixa']);
   $digito = (fmod($numero, 11) == 10) ? 0 : fmod($numero, 11);
   $autorizacao->setValor("numero", $numero);
-  $autorizacao->setValor("id_competencia",     $_POST['id_competencia']);
+  $autorizacao->setValor("id_competencia", $_POST['id_competencia']);
   $autorizacao->setValor("id_estabelecimento", $_POST['id_estabelecimento']);
-  $autorizacao->setValor("id_faixa",           $_POST['id_faixa']);
-  $autorizacao->setValor("id_operador",        $_POST['id_operador']);
-  $autorizacao->setValor("id_tipo",            $_POST['id_tipo']);
-  $autorizacao->setValor("id_autorizador",     $_POST['id_autorizador']);
-  $autorizacao->setValor("id_solicitante",     $_POST['id_solicitante']);
-  $autorizacao->setValor("id_municipio",       $_POST['hidden_municipio']);
-  $autorizacao->setValor("uf",                 $_POST['hidden_estado']);
-  $autorizacao->setValor("id_procedimento",    $_POST['hidden_procedimento']);
-  $autorizacao->setValor("id_diagnostico",     $_POST['hidden_diagnostico']);
-  $autorizacao->setValor("cartao_sus",         $_POST['cns']);
-  $autorizacao->setValor("nome_paciente",      strtoupper($_POST['nome_paciente']));
-  $autorizacao->setValor("nome_da_mae",        strtoupper($_POST['nome_mae']));
-  $autorizacao->setValor("nome_responsavel",   strtoupper($_POST['nome_responsavel']));
-  $autorizacao->setValor("sexo",               strtoupper($_POST['sexo']));
-  $autorizacao->setValor("endereco",           strtoupper($_POST['endereco']));
-  $autorizacao->setValor("bairro",             strtoupper($_POST['bairro']));
-  $autorizacao->setValor("cep",                str_replace('-', '', $_POST['cep']));
-  $autorizacao->setValor("raca_cor",           $_POST['raca_cor']);
-  $autorizacao->setValor("data_autoriza",      ConverteDataParaEUA($_POST['data_autoriza']));
-  $autorizacao->setValor("data_nascimento",    ConverteDataParaEUA($_POST['data_nascimento']));
-  $autorizacao->setValor("str_competencia",    formataCompetencia($_POST['id_competencia']));
+  $autorizacao->setValor("id_faixa", $_POST['id_faixa']);
+  $autorizacao->setValor("id_operador", $_POST['id_operador']);
+  $autorizacao->setValor("id_tipo", $_POST['id_tipo']);
+  $autorizacao->setValor("id_autorizador", $_POST['id_autorizador']);
+  $autorizacao->setValor("id_solicitante", $_POST['id_solicitante']);
+  $autorizacao->setValor("id_municipio", $_POST['hidden_municipio']);
+  $autorizacao->setValor("uf", $_POST['hidden_estado']);
+  $autorizacao->setValor("id_procedimento", $_POST['hidden_procedimento']);
+  $autorizacao->setValor("id_diagnostico", $_POST['hidden_diagnostico']);
+  $autorizacao->setValor("cartao_sus", $_POST['cns']);
+  $autorizacao->setValor("nome_paciente", strtoupper($_POST['nome_paciente']));
+  $autorizacao->setValor("nome_da_mae", strtoupper($_POST['nome_mae']));
+  $autorizacao->setValor("nome_responsavel", strtoupper($_POST['nome_responsavel']));
+  $autorizacao->setValor("sexo", strtoupper($_POST['sexo']));
+  $autorizacao->setValor("endereco", strtoupper($_POST['endereco']));
+  $autorizacao->setValor("bairro", strtoupper($_POST['bairro']));
+  $autorizacao->setValor("cep", str_replace('-', '', $_POST['cep']));
+  $autorizacao->setValor("raca_cor", $_POST['raca_cor']);
+  $autorizacao->setValor("data_autoriza", ConverteDataParaEUA($_POST['data_autoriza']));
+  $autorizacao->setValor("data_nascimento", ConverteDataParaEUA($_POST['data_nascimento']));
+  $autorizacao->setValor("str_competencia", '0000');
+  $autorizacao->setValor("carater_atendimento", $_POST['carater_atendimento']);
   if ($autorizacao->inserir($autorizacao) == 1) {
-/*    $unidade = new Estabelecimento("valor_saldo");
-    $unidade->valorpk = $_POST['id_estabelecimento'];
-    $saldo_atual = $unidade->getValor("valor_saldo");
-    atualizaSaldo($_POST['id_estabelecimento'], ($saldo_atual - pegaValor($_POST['hidden_procedimento'], $_POST['id_competencia'])));
-  */  echo $numero;
+    echo $numero;
   }
 }
 
@@ -214,7 +265,7 @@ function listagem() {
       <td style="width: 14%; text-align: center">Nascimento</td>
       <td style="width: 14%; text-align: center">Autorização</td>
     </tr> 
-  <? while ($linha = $autorizacao->retornaDados()) { ?>
+    <? while ($linha = $autorizacao->retornaDados()) { ?>
       <tr>
         <td style="text-align: center"><?= $linha->numero . $linha->digito ?></td>
         <td style="text-align: left"  ><?= $linha->nome_paciente ?></td>
@@ -253,17 +304,17 @@ function listagem() {
         <td style="width: 14%; text-align: center">Nascimento</td>
         <td style="width: 14%; text-align: center">Internação</td>
       </tr>
-  <?
-  $permissao = new Permissao();
-  while ($linha = $autorizacao->retornaDados()) {
-    ?>
+      <?
+      $permissao = new Permissao();
+      while ($linha = $autorizacao->retornaDados()) {
+        ?>
         <tr>
           <td style="text-align: center"><a class='show' href='#' onclick='exibir(<?= $linha->id ?>)' title="Detalhar"><?= "{$linha->numero}-{$linha->digito}" ?></a> </td>
           <td>
-    <?php
-    $possui_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
-    echo ($possui_permissao == true) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
-    ?>
+            <?php
+            $possui_permissao = $permissao->checaPermissao($operador, $linha->id_estabelecimento);
+            echo ($possui_permissao == true) ? "<a class='alterar' href='views/autorizacoes/alterar.php?id={$linha->id}' title='Alterar'>" . substr($linha->nome_pac, 0, 30) . "</a>" : substr($linha->nome_pac, 0, 30)
+            ?>
           </td>
           <td style="text-align: center"><?= ConverteDataParaBR($linha->nascimento) ?> </td>
           <td style="text-align: center"><?= ConverteDataParaBR($linha->internacao) ?> </td>

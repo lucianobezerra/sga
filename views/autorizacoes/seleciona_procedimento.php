@@ -9,13 +9,6 @@ $session->start();
 $tipo = $session->getNode("id_tipo");
 $cmpt = $session->getNode("id_competencia");
 
-$cp = new Competencia();
-$cp->valorpk = $cmpt;
-$cp->strCompetencia($cp);
-$strCmpt = '';
-while ($s = $cp->retornaDados("array")) {
-  $strCmpt = $s[0];
-}
 ?>
 <html>
   <head>
@@ -44,8 +37,8 @@ while ($s = $cp->retornaDados("array")) {
       $tipos = ($tipo == 1) ? '03' : '';
       $sql  = "select procedimentos.id, procedimentos.codigo, procedimentos.descricao from procedimentos ";
       $sql .= "inner join procedimentos_registros on procedimentos.codigo=procedimentos_registros.codigo_procedimento ";
-      $sql .= "where procedimentos_registros.codigo_registro = '{$tipos}' and procedimentos_registros.cmpt='{$strCmpt}' ";
-      $sql .= "and procedimentos.cmpt='{$strCmpt}' AND upper(procedimentos.descricao) like '%".strtoupper($_POST['descricao'])."%' ";
+      $sql .= "where procedimentos_registros.codigo_registro = '{$tipos}' and procedimentos_registros.id_competencia={$cmpt} ";
+      $sql .= "and procedimentos.id_competencia={$cmpt} AND upper(procedimentos.descricao) like '%".strtoupper($_POST['descricao'])."%' ";
       $sql .= "order by procedimentos.descricao";
       $conexao = new Conexao('sga2');
       $conexao->open();
