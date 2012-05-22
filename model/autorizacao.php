@@ -21,16 +21,11 @@ $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
 $valor = isset($_POST['searchField']) ? $_POST['searchField'] : null;
 
 switch ($acao) {
-  case "inserir": inserir();
-    break;
-  case "alterar": alterar($id);
-    break;
-  case "listagem": listagem();
-    break;
-  case "localiza": localiza($valor);
-    break;
-  case "exibir": exibir($id);
-    break;
+  case "inserir": inserir();         break;
+  case "alterar": alterar($id);      break;
+  case "listagem": listagem();       break;
+  case "localiza": localiza($valor); break;
+  case "exibir": exibir($id);        break;
 }
 
 function exibir($id) {

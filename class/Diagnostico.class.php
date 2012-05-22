@@ -22,6 +22,14 @@ class Diagnostico extends Base {
     }
     return $this->executaSql($sql);
   }
+  
+  public function sexoCompativel($objeto){
+    $sql = "select count(id) as qtde from {$objeto->tabela} ";
+    if ($objeto->extras_select != null) {
+      $sql .= " " . $objeto->extras_select . " ";
+    }
+    return $this->executaSql($sql);
+  }
 
 }
 
