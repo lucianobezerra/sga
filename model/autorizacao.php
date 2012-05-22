@@ -1,4 +1,3 @@
-
 <?php
 if (defined('ROOT_APP') == false) {
   define('ROOT_APP', $_SERVER['DOCUMENT_ROOT'] . "/sga");
@@ -16,16 +15,16 @@ require(ROOT_APP . '/class/EstabelecimentoTeto.class.php');
 require(ROOT_APP . '/class/Permissao.class.php');
 require(ROOT_APP . '/class/Autorizacao.class.php');
 
-$acao = isset($_REQUEST['acao']) ? $_REQUEST['acao'] : null;
-$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
+$acao  = isset($_REQUEST['acao'])     ? $_REQUEST['acao']     : null;
+$id    = isset($_REQUEST['id'])       ? $_REQUEST['id']       : null;
 $valor = isset($_POST['searchField']) ? $_POST['searchField'] : null;
 
 switch ($acao) {
-  case "inserir": inserir();         break;
-  case "alterar": alterar($id);      break;
+  case "inserir":  inserir();        break;
+  case "alterar":  alterar($id);     break;
   case "listagem": listagem();       break;
   case "localiza": localiza($valor); break;
-  case "exibir": exibir($id);        break;
+  case "exibir":   exibir($id);      break;
 }
 
 function exibir($id) {
@@ -158,6 +157,17 @@ function checaIdade($id_procedimento, $idade, $id_competencia) {
   $procedimento->extras_select = "where codigo='{$id_procedimento}' and {$idade} between (idade_minima/12) and (idade_maxima/12) and id_competencia={$id_competencia}";
   $procedimento->idadeCompativel($procedimento);
   while ($linha = $procedimento->retornaDados()) {
+    $valor = ($linha->qtde > 0) ? true : false;
+  }
+  return $valor;
+}
+
+function checaSexoDiagnostico($id_diagnostico, $sexo){
+  $valor = null;
+  $diagnostico = new Diagnostico();
+  $diagnostico->extras_select = "where codigo='{$id_diagnostico}' and sexo in ('I','{$sexo}')";
+  $diagnostico->sexoCompativel($diagnostico);
+  while ($linha = $diagnostico->retornaDados()) {
     $valor = ($linha->qtde > 0) ? true : false;
   }
   return $valor;
