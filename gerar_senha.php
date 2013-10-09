@@ -1,15 +1,23 @@
-<?php
-  include 'util/funcoes.php';
-  $expirar = '2012-05-12';
-  //$hoje    = Date('Y-m-d');
-  echo "Expirar em: ".ConverteDataparaBR($expirar).": ". encode5t($expirar);
-  //echo "<br/>";
-  //echo "Data Atual: ".ConverteDataparaBR($hoje).": ". encode5t($hoje)."<br/>";
-  /*  
-  echo "Senha para Odete: ".md5('06091985')."<br/>";
-  echo "Senha para Neuma: ".md5('291293')."<br/>";
-  echo "Senha para Hudson: ".md5('230109')."<br/>";
-  echo "Senha para Gorete: ".md5('cnes')."<br/>";
-  echo "Senha para Thais: ".md5('19111991')."<br/>";
-  */
-?>
+<script type="text/javascript">
+  $(function($){
+    $('form#gera_senha').submit(function(){
+      var data = $('input[name=data_limite]').val();
+      var  url = 'libera_senha.php';
+      $.post(url, {data: data}, function(resposta){
+        $('div#retorno').html(resposta);
+      })
+      return false;
+    });
+  })
+</script>
+
+<p>Gerar Senha de Liberação:</p>
+<br/>
+<form id="gera_senha" method="post" action="#">
+  <fieldset>
+    Liberar Até: <input type="date" name="data_limite" size="10" placeholder="Nova Data"/><br/>
+    <button name="gerar_senha" type="submit" style="width: 100px; height: 25px" class="campo">Gerar Senha</button>
+  </fieldset>  
+</form>
+
+<div id='retorno'></div>

@@ -30,6 +30,11 @@ $nivel = retornaNivel();
   <dd>
     <ul>
       <li><a href="views/manutencao/alterar_senha.php">Alterar Senha</a></li>
+      <?php
+        if($nivel == 0){
+          echo "<li> <a href='gerar_senha.php'>Gerar Senha</a></li>";
+        }
+      ?>
     </ul>
   </dd>
   <dt><a class="sair" href="sair.php">Sair do Sistema</a></dt>
