@@ -23,9 +23,9 @@ if (!$valida->validaSistema()) {
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/menus.css"/>
-    <script type='text/javascript' src='js/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery.js'></script>
     <script type='text/javascript' src='js/jquery.form.js'></script>
-    <script type='text/javascript' src='js/jquery.maskedinput-1.3.min.js'></script>
+    <script type='text/javascript' src='js/jquery.maskedinput.js'></script>
     <script type='text/javascript' src='js/jquery.cycle.all.js'></script>
     <script type='text/javascript'>
       $(function(){
