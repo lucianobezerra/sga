@@ -2,7 +2,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>SGA::Geração de Senhas</title>
-    <script type='text/javascript' src='js/jquery-2.1.3.min.js'></script>
+    <script type='text/javascript' src='js/jquery.js'></script>
     <script type="text/javascript">
     $(function($){
       $('form#gera_senha').submit(function(){

@@ -4,12 +4,12 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type='text/javascript' src='js/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery.js'></script>
   </head>
   <body>
     <script type="text/javascript">
       $(function(){
-        $('button[name=salvar]').live('click', function(){
+        $('button[name=salvar]').click(function(){
           var url    = 'model/licenca.php?acao=liberar';
           var params = $('form').serialize();
           $.ajax({ type: 'post', url: url, data: params,
